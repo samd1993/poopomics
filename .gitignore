@@ -3,10 +3,10 @@
 photos.zip
 *.heic
 build/people/src/
-build/people/faces/
-build/people/tiles/
-build/people/strips/
 reference/legacy-site/assets/
+
+# The derived crops (6 MB total) ARE tracked: they are what build_site.py actually reads, so a
+# fresh clone can build the site without the 270 MB of originals.
 
 # Loose photographs dropped in the project root on their way into people/src/better
 /*.jpg
