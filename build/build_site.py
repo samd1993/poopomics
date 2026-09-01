@@ -560,24 +560,20 @@ MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
     figure(svg("figs/mmc/mmc-tier-by-year.svg"),
            "Volume climbs; reusability does not follow",
            "Studies reviewed per year, stacked by reusability tier. 2025 is a partial year — the "
-           "review closed mid-year.",
+           "review closed mid-year. Computed from the earlier export of 2,046 studies, "
+           "which is why the bars total less than the 3,145 above.",
            kicker="Over time"),
     figure(svg("figs/mmc/mmc-sequencing-type.svg"),
            "16S is still how most of the literature was sequenced",
-           "Share of studies per year by sequencing approach, among the 2,045 studies where it was "
-           "recorded.",
+           "Share of studies per year by sequencing approach, among the 2,045 studies of the earlier "
+           "export where it was recorded.",
            kicker="Method"))}
 
 {papers(("Sample Size Reporting in Human Cancer Microbiome Research is Inconsistent and "
         "Unstandardized",
         "Preprint &middot; in revision at <em>Access Microbiology</em>, 18 February 2026",
         "https://doi.org/10.1099/acmi.0.001187.v1"))}
-
-{note("The waffle is drawn from the current tier totals: 3,145 "
-      "studies across the four tiers. The funnel and the two yearly panels are still computed "
-      "from an earlier export, <code>MMC1_study_data_final.tsv</code> at n=2,046, so their "
-      "counts and percentages are proportions of that subset until a per-year table replaces "
-      "it. The waffle is at sample level: 1,013,122 samples across 3,145 studies.")}'''
+'''
 
 
 # ---------------------------------------------------------------- styling ----
