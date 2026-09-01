@@ -1,0 +1,11 @@
+#!/bin/sh
+# Rebuild and stage the site. Run from anywhere in the project.
+#   ./publish            rebuild site/ and deploy/index.html
+set -e
+cd "$(dirname "$0")/build"
+python3 build_site.py           # preview + artifact copies
+python3 build_site.py --site    # site/ with external assets, for the host
+cp poopomics-v1.html ../deploy/index.html
+echo
+echo "site/       -> upload this folder to the host (index.html + assets/)"
+echo "deploy/     -> the single-file fallback, if you ever need one file"

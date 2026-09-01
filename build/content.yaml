@@ -1,0 +1,187 @@
+# Everything on the site that changes week to week. Edit this, then run:
+#     python3 build_site.py            # preview build
+#     python3 build_site.py --site     # the deployable site/ folder
+#
+# A news item needs: title, note. Optional: url, meta, date, people (names that get
+# a face), portrait (one name, shown large), pic (kind: img|svg|photo, ref: path or
+# credit key), flip: true to put the picture on the right.
+#
+# Figure captions and the project write-ups still live in build_site.py, beside the
+# figures they describe.
+
+people_total: '450'
+institutions:
+- UC San Diego
+- Northwestern
+- Johns Hopkins
+- Duke
+- Harvard
+- Yale
+- Columbia
+- New York University
+- UCLA
+- Michigan
+- Virginia
+- Illinois Urbana-Champaign
+- Arizona State
+- Dartmouth
+- Baylor
+- Florida International
+- Harvey Mudd
+- Soonchunhyang
+- East Jefferson General Hospital
+at_top:
+- Sam Degregori
+- Katherine Amato
+- Rob Knight
+project_leads:
+- name: Isabella Huang
+  role: Project manager
+- name: Lynn Fetcinko
+- name: Ariadne García Reyes
+- name: David Kobobel
+- name: Harrison Gu
+- name: Bree Xie
+- name: Soumya Khadye
+- name: Kevin Wu
+- name: Vanessa Yang
+- name: Malleeka Suy
+- name: Emily Song
+- name: Harrison Martel
+- name: Dmitry Kisselev
+- name: Chloé Légé
+- name: Noah Schulhof
+- name: Akhil Kommala
+team_labels:
+  mmc: 'The Microbiome Metadata Crisis Consortium: <em>450+ members</em>'
+  gmtol: The Gut Microbiome Tree of Life (GMToL) Team
+  hmtol: The Human Microbiome Tree of Life (HMToL) Team
+news:
+- heading: Publications
+  items:
+  - title: An expansive animal gut microbiome dataset elucidates major compositional shifts across bilaterian
+      evolution
+    url: https://www.biorxiv.org/content/10.64898/2026.04.29.721755v2
+    date: 8 May 2026
+    meta: Preprint &middot; <em>bioRxiv</em> &middot; under review at <em>Science</em>
+    note: GMToL's second paper, and the one the dataset itself is built on. Degregori, Patel, Xu, Iter,
+      Weng, Huang, Martel, Kisselev, Zhao, Allaband, Ackermann, Gonz&aacute;lez, McDonald, Amato and Knight.
+    people:
+    - Sam Degregori
+    - Luis Xu
+    - Isabella Huang
+    - Harrison Martel
+    - Dmitry Kisselev
+    - Jianshu Zhao
+    - Katherine Amato
+    - Rob Knight
+    pic:
+      kind: img
+      ref: figs/gmtol/gmtol-pcoa-news.webp
+  - title: Sample Size Reporting in Human Cancer Microbiome Research is Inconsistent and Unstandardized
+    url: https://doi.org/10.1099/acmi.0.001187.v1
+    date: 18 February 2026
+    flip: true
+    meta: Preprint &middot; in revision at <em>Access Microbiology</em>
+    note: Led by <b>David Kobobel</b>, with Degregori, Gonzalez, Wright, Richie, Han, Gu, Huang, Martel,
+      Garcia Reyes, Kisselev, Song and Knight.
+    people:
+    - David Kobobel
+    - Sam Degregori
+    - Antonio González
+    - Harrison Gu
+    - Isabella Huang
+    - Harrison Martel
+    - Ariadne García Reyes
+    - Dmitry Kisselev
+    - Emily Song
+    - Rob Knight
+    pic:
+      kind: svg
+      ref: figs/cards/mmc-mark.svg
+  - title: 'Comparative gut microbiome research through the lens of ecology: theoretical considerations
+      and best practices'
+    url: https://doi.org/10.1111/brv.13161
+    date: '2024'
+    meta: <em>Biological Reviews</em> 100(2):748&ndash;763
+    note: GMToL's first paper. Degregori, Wang, Kommala, Schulhof, Moradi, MacDonald, Eblen, Jukovich,
+      Smith, Kelleher, Suzuki, Hall, Knight and Amato &mdash; eight of the fourteen authors were undergraduates
+      on the project.
+    people:
+    - Sam Degregori
+    - Xaolin (Diego) Wang
+    - Akhil Kommala
+    - Noah Schulhof
+    - Sophia Jukovich
+    - Emma Smith
+    - Emily Kelleher
+    - Kota Suzuki
+    - Zoey Hall
+    - Rob Knight
+    - Katherine Amato
+    pic:
+      kind: img
+      ref: figs/cards/gmtol-card.webp
+- heading: PhD Program Acceptances!
+  items:
+  - title: Zoey Hall &mdash; Epidemiology, UNC Chapel Hill
+    note: Accepted to the PhD programme in epidemiology.
+    portrait: Zoey Hall
+    pic:
+      kind: photo
+      ref: unc
+  - title: Luis Xu &mdash; Bioinformatics, UC San Diego
+    note: Accepted to the bioinformatics PhD programme.
+    portrait: Luis Xu
+    pic:
+      kind: photo
+      ref: ucsd
+- heading: Masters Program Acceptances!
+  items:
+  - title: Kaiyuan Du &mdash; ScM in Biochemistry and Molecular Biology, Johns Hopkins Bloomberg School
+      of Public Health
+    note: Graduated from Johns Hopkins as an undergraduate in May 2026 and starts the ScM programme this
+      autumn.
+    portrait: Kaiyuan Du
+  - title: Randima Bellana &mdash; MSE in Computer Science, Johns Hopkins University
+    note: Accepted to the residential master's programme.
+    portrait: Randima Bellana
+  - title: Tyra Gravesande &mdash; MSPH in Population, Family and Reproductive Health, Johns Hopkins Bloomberg
+      School of Public Health
+    note: Accepted to the master's programme.
+    portrait: Tyra Gravesande
+  - title: Saleem Sabeer &mdash; Applied Science in Computer Science (MSc), University of Pennsylvania
+    note: Accepted to the master's programme.
+    portrait: Saleem Sabeer
+  - title: Xaolin (Diego) Wang &mdash; MPhil in Finance and Economics, University of Cambridge
+    note: Accepted to the MPhil programme.
+    portrait: Xaolin (Diego) Wang
+    pic:
+      kind: photo
+      ref: cambridge
+- heading: Medical School Acceptances!
+  items:
+  - title: Emily Kelleher &mdash; University of Northern Colorado
+    date: '2026'
+    note: Accepted to the programme.
+    portrait: Emily Kelleher
+  - title: Sadaf Moradi &mdash; Washington University School of Medicine
+    date: '2024'
+    note: Accepted to medical school.
+    portrait: Sadaf Moradi
+- heading: Conferences
+  items:
+  - title: Analysis of Transnational and Cross-Continental Collaboration Trends in Microbiome Papers
+    date: 5 June 2026
+    meta: ASM Microbe 2026, Washington DC &middot; poster HEALTH-FRI-329
+    note: <b>Ariadne Garc&iacute;a Reyes</b> presented the MMC collaboration work &mdash; how often microbiome
+      research crosses borders, and which countries are left out of it. With Vudatha, Kisselev, Kobobel,
+      Degregori and Knight.
+    photo: asm-2026
+    people:
+    - Ariadne García Reyes
+    - Ritvik Vudatha
+    - Dmitry Kisselev
+    - David Kobobel
+    - Sam Degregori
+    - Rob Knight

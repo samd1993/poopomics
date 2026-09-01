@@ -43,7 +43,7 @@ def main():
             im = im.resize((FACE * SCALE, FACE * SCALE), Image.LANCZOS)
             strip.paste(im, (i * cell + GAP * SCALE // 2, GAP * SCALE // 2))
         p = os.path.join(OUT, "band-%d.jpg" % (r + 1))
-        strip.save(p, quality=80, optimize=True, progressive=True)
+        strip.save(p, quality=68, optimize=True, progressive=True)
         print("band-%d  %d faces  %dx%d  %.0f KB"
               % (r + 1, len(chunk), strip.width, strip.height, os.path.getsize(p) / 1024))
     # per-face tiles for the labelled grid on the people page (named first, unnamed last)

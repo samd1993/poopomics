@@ -4,20 +4,21 @@ Everything is inlined: the figure SVGs as markup (so the page's Mulish webfont r
 labels), the GMToL panels and the face collage as data URIs, and the two ported lenses.
 Run the scripts in figs/ and people/ first; this only assembles.
 """
-import base64, json, os, re, sys
+import base64, hashlib, json, os, re, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+# Everything that changes week to week — the news, the roster, the institutions — lives in
+# content.yaml so it can be edited without opening this file.
+import yaml
+CONTENT = yaml.safe_load(open(os.path.join(HERE, "content.yaml"), encoding="utf-8"))
 
 OUT = os.path.join(HERE, "poopomics-v1.html")
 ART = os.path.join(HERE, "poopomics-v1-artifact.html")
 
 # Nineteen institutions, the three leading the projects first.
-INSTITUTIONS = ["UC San Diego", "Northwestern", "Johns Hopkins", "Duke", "Harvard", "Yale",
-                "Columbia", "New York University", "UCLA", "Michigan", "Virginia",
-                "Illinois Urbana-Champaign", "Arizona State", "Dartmouth", "Baylor",
-                "Florida International", "Harvey Mudd", "Soonchunhyang",
-                "East Jefferson General Hospital"]
-PEOPLE = "450"
+INSTITUTIONS = CONTENT["institutions"]
+PEOPLE = CONTENT["people_total"]
 
 
 # ---------------------------------------------------------------- helpers ----
@@ -30,14 +31,39 @@ def svg(path, cls="p-fig-svg"):
     return '<div class="%s">%s</div>' % (cls, s)
 
 
+# Two builds come out of this script. The artifact has to be one self-contained file, so every
+# asset is inlined as base64. The hosted site does not: writing the images out as real files drops
+# a third of their weight (base64 costs 33%), lets the browser cache them, and — because a
+# background image on a hidden view is never fetched — means a phone opening the home page does
+# not download the 185 portraits behind the People sheet.
+ASSET_DIR = None                       # set to a path to switch to file assets
+if "--site" in sys.argv:               # must be decided before the views are assembled below
+    ASSET_DIR = os.path.abspath(os.path.join(HERE, "..", "site", "assets"))
+    # assets are content-hashed, so a stale one is never referenced but would sit there for ever
+    if os.path.isdir(ASSET_DIR):
+        shutil.rmtree(ASSET_DIR)
+    os.makedirs(ASSET_DIR, exist_ok=True)
+
+
 def data_uri(path, mime):
-    b = base64.b64encode(open(os.path.join(HERE, path), "rb").read()).decode()
-    return "data:%s;base64,%s" % (mime, b)
+    src = os.path.join(HERE, path)
+    if ASSET_DIR is None:
+        b = base64.b64encode(open(src, "rb").read()).decode()
+        return "data:%s;base64,%s" % (mime, b)
+    name = os.path.basename(path)
+    digest = hashlib.sha1(open(src, "rb").read()).hexdigest()[:8]
+    stem, ext = os.path.splitext(name)
+    out = "%s.%s%s" % (stem.replace(" ", "-"), digest, ext)
+    dest = os.path.join(ASSET_DIR, out)
+    if not os.path.exists(dest):
+        shutil.copyfile(src, dest)
+    return "assets/" + out
 
 
 def img(path, alt, mime="image/webp", cls=""):
     c = ' class="%s"' % cls if cls else ""
-    return '<img%s src="%s" alt="%s">' % (c, data_uri(path, mime), alt)
+    return '<img%s src="%s" alt="%s" loading="lazy" decoding="async">' % (
+        c, data_uri(path, mime), alt)
 
 
 def figure(body, heading, caption, kicker=None, span="half"):
@@ -180,94 +206,16 @@ def home_view():
 # ---------------------------------------------------------------------- news ----
 # Both publications were checked against Crossref/PMC rather than typed from memory; the poster
 # details come off the photograph of the board.
-NEWS = [
-    ("Publications", [
-        dict(title="An expansive animal gut microbiome dataset elucidates major compositional "
-                   "shifts across bilaterian evolution",
-             url="https://www.biorxiv.org/content/10.64898/2026.04.29.721755v2",
-             date="8 May 2026", pic=("img", "figs/gmtol/gmtol-pcoa-news.webp"),
-             meta="Preprint &middot; <em>bioRxiv</em> &middot; under review at <em>Science</em>",
-             note="GMToL's second paper, and the one the dataset itself is built on. Degregori, "
-                  "Patel, Xu, Iter, Weng, Huang, Martel, Kisselev, Zhao, Allaband, Ackermann, "
-                  "Gonz&aacute;lez, McDonald, Amato and Knight.",
-             people=["Sam Degregori", "Luis Xu", "Isabella Huang", "Harrison Martel",
-                     "Dmitry Kisselev", "Jianshu Zhao", "Katherine Amato", "Rob Knight"]),
-        dict(title="Sample Size Reporting in Human Cancer Microbiome Research is Inconsistent "
-                   "and Unstandardized",
-             url="https://doi.org/10.1099/acmi.0.001187.v1",
-             date="18 February 2026", pic=("svg", "figs/cards/mmc-mark.svg"), flip=True,
-             meta="Preprint &middot; in revision at <em>Access Microbiology</em>",
-             note="Led by <b>David Kobobel</b>, with Degregori, Gonzalez, Wright, Richie, Han, Gu, "
-                  "Huang, Martel, Garcia Reyes, Kisselev, Song and Knight.",
-             people=["David Kobobel", "Sam Degregori", "Antonio González", "Harrison Gu",
-                     "Isabella Huang", "Harrison Martel", "Ariadne García Reyes",
-                     "Dmitry Kisselev", "Emily Song", "Rob Knight"]),
-        dict(title="Comparative gut microbiome research through the lens of ecology: "
-                   "theoretical considerations and best practices",
-             url="https://doi.org/10.1111/brv.13161",
-             date="2024", pic=("img", "figs/cards/gmtol-card.webp"),
-             meta="<em>Biological Reviews</em> 100(2):748&ndash;763",
-             note="GMToL's first paper. Degregori, Wang, Kommala, Schulhof, Moradi, MacDonald, "
-                  "Eblen, Jukovich, Smith, Kelleher, Suzuki, Hall, Knight and Amato &mdash; eight "
-                  "of the fourteen authors were undergraduates on the project.",
-             people=["Sam Degregori", "Xaolin (Diego) Wang", "Akhil Kommala", "Noah Schulhof",
-                     "Sophia Jukovich", "Emma Smith", "Emily Kelleher", "Kota Suzuki",
-                     "Zoey Hall", "Rob Knight", "Katherine Amato"]),
-    ]),
-    ("PhD Program Acceptances!", [
-        dict(title="Zoey Hall &mdash; Epidemiology, UNC Chapel Hill", url=None, meta=None,
-             date=None, pic=("photo", "unc"),
-             note="Accepted to the PhD programme in epidemiology.", people=None, portrait="Zoey Hall"),
-        dict(title="Luis Xu &mdash; Bioinformatics, UC San Diego", url=None, meta=None,
-             date=None, pic=("photo", "ucsd"),
-             note="Accepted to the bioinformatics PhD programme.", people=None, portrait="Luis Xu"),
-    ]),
-    ("Masters Program Acceptances!", [
-        dict(title="Kaiyuan Du &mdash; ScM in Biochemistry and Molecular Biology, "
-                   "Johns Hopkins Bloomberg School of Public Health", url=None, meta=None,
-             date=None, pic=(None, None),
-             note="Graduated from Johns Hopkins as an undergraduate in May 2026 and starts the "
-                  "ScM programme this autumn.", people=None, portrait="Kaiyuan Du"),
-        dict(title="Randima Bellana &mdash; MSE in Computer Science, Johns Hopkins University",
-             url=None, meta=None, date=None, pic=(None, None),
-             note="Accepted to the residential master's programme.", people=None,
-             portrait="Randima Bellana"),
-        dict(title="Tyra Gravesande &mdash; MSPH in Population, Family and Reproductive Health, "
-                   "Johns Hopkins Bloomberg School of Public Health", url=None, meta=None,
-             date=None, pic=(None, None),
-             note="Accepted to the master's programme.", people=None,
-             portrait="Tyra Gravesande"),
-        dict(title="Saleem Sabeer &mdash; Applied Science in Computer Science (MSc), "
-                   "University of Pennsylvania", url=None, meta=None,
-             date=None, pic=(None, None),
-             note="Accepted to the master's programme.", people=None, portrait="Saleem Sabeer"),
-        dict(title="Xaolin (Diego) Wang &mdash; MPhil in Finance and Economics, "
-                   "University of Cambridge", url=None, meta=None,
-             date=None, pic=("photo", "cambridge"),
-             note="Accepted to the MPhil programme.", people=None, portrait="Xaolin (Diego) Wang"),
-    ]),
-    ("Medical School Acceptances!", [
-        dict(title="Emily Kelleher &mdash; University of Northern Colorado", url=None, meta=None,
-             date="2026", pic=(None, None),
-             note="Accepted to the programme.", people=None, portrait="Emily Kelleher"),
-        dict(title="Sadaf Moradi &mdash; Washington University School of Medicine",
-             url=None, meta=None, date="2024", pic=(None, None),
-             note="Accepted to medical school.", people=None, portrait="Sadaf Moradi"),
-    ]),
-    ("Conferences", [
-        dict(title="Analysis of Transnational and Cross-Continental Collaboration Trends "
-                   "in Microbiome Papers",
-             url=None,
-             date="5 June 2026",
-             meta="ASM Microbe 2026, Washington DC &middot; poster HEALTH-FRI-329",
-             note="<b>Ariadne Garc&iacute;a Reyes</b> presented the MMC collaboration work &mdash; "
-                  "how often microbiome research crosses borders, and which countries are left "
-                  "out of it. With Vudatha, Kisselev, Kobobel, Degregori and Knight.",
-             photo="asm-2026",
-             people=["Ariadne García Reyes", "Ritvik Vudatha", "Dmitry Kisselev", "David Kobobel",
-                     "Sam Degregori", "Rob Knight"]),
-    ]),
-]
+def _news_item(d):
+    """content.yaml carries only what an item has; the renderers expect every key present."""
+    pic = d.get("pic") or {}
+    return dict(title=d["title"], note=d["note"], url=d.get("url"), meta=d.get("meta"),
+                date=d.get("date"), people=d.get("people"), portrait=d.get("portrait"),
+                photo=d.get("photo"), flip=d.get("flip", False),
+                pic=(pic.get("kind"), pic.get("ref")))
+
+
+NEWS = [(g["heading"], [_news_item(i) for i in g["items"]]) for g in CONTENT["news"]]
 
 
 CREDITS = json.load(open(os.path.join(HERE, "news", "credits.json")))
@@ -365,22 +313,12 @@ def news_view():
 
 # ----------------------------------------------------------------- people ----
 # The project leads, in the order Sam listed them; second item is a role, where there is one.
-PROJECT_LEADS = [("Isabella Huang", "Project manager"), ("Lynn Fetcinko", None),
-                 ("Ariadne García Reyes", None), ("David Kobobel", None), ("Harrison Gu", None),
-                 ("Bree Xie", None), ("Soumya Khadye", None), ("Kevin Wu", None),
-                 ("Vanessa Yang", None), ("Malleeka Suy", None), ("Emily Song", None),
-                 ("Harrison Martel", None), ("Dmitry Kisselev", None), ("Chloé Légé", None),
-                 ("Noah Schulhof", None), ("Akhil Kommala", None)]
+PROJECT_LEADS = [(d["name"], d.get("role")) for d in CONTENT["project_leads"]]
 
-TEAM_LABEL = {
-    "mmc": "The Microbiome Metadata Crisis Consortium: "
-           "<em>%s+ members</em>" % PEOPLE,
-    "gmtol": "The Gut Microbiome Tree of Life (GMToL) Team",
-    "hmtol": "The Human Microbiome Tree of Life (HMToL) Team",
-}
+TEAM_LABEL = CONTENT["team_labels"]
 
 # already shown as cards at the top of the page, so they are not repeated in the grids
-AT_TOP = ["Sam Degregori", "Katherine Amato", "Rob Knight"]
+AT_TOP = CONTENT["at_top"]
 
 
 def face_css(index):
@@ -1299,6 +1237,17 @@ def build():
 {body}
 </body>
 </html>"""
+    if ASSET_DIR:
+        site = os.path.dirname(ASSET_DIR)
+        page = os.path.join(site, "index.html")
+        open(page, "w").write(standalone)
+        n = len(os.listdir(ASSET_DIR))
+        print("wrote site/index.html  %.2f MB  + %d files in site/assets (%.2f MB)"
+              % (os.path.getsize(page) / 1e6, n,
+                 sum(os.path.getsize(os.path.join(ASSET_DIR, f))
+                     for f in os.listdir(ASSET_DIR)) / 1e6))
+        return
+
     open(OUT, "w").write(standalone)
     print("wrote %s  %.2f MB" % (os.path.basename(OUT), os.path.getsize(OUT) / 1e6))
 
