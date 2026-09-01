@@ -1548,3 +1548,19 @@ Sadaf Moradi's photo arrived as `Sodaf Moradi.jpg`; in under the correct spellin
 
 Still unanswered: study totals sum to **3,145** vs the 3,300 headline, and "counted / filled"
 remains unused.
+
+## forty-ninth round — three MMC edits
+
+- Waffle heading -> "3,145 clinical human microbiome studies that we meticulously surveyed, shown
+  at the sample level" (one comma added so it parses in a single read).
+- The note's `<b>About the figures.</b>` lead-in removed; the panel styling stays.
+- Funnel: `#text106472` 2,305 -> **3,300**. That node is the *second* step, "filtered using PubMed
+  best-match", so the funnel now runs 33,564 -> 3,300 -> 2,046.
+
+**Flagged, left open**: 3,300 now means two things on one page — the filtered set in the graphic,
+and "human-health articles read in full" in the caption below it. If 3,300 is the human-health
+count it belongs on the third step instead. Also the two steps to its right are still derived from
+2,046 (70 variables x 2,046 = the 143,220 shown; at 3,300 it would be ~231,000).
+
+The page now carries 3,145 (waffle) and 3,300 (funnel, card, caption) side by side, both at Sam's
+instruction.

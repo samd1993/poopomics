@@ -546,7 +546,7 @@ MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
              span="full"))}
 
 {figs(figure(svg("figs/mmc/mmc-reusability-waffle.svg"),
-             "Every study we read, sorted by how far you can get with its data",
+             "3,145 clinical human microbiome studies that we meticulously surveyed, shown at the sample level",
              "One square is about 320 samples, banded by the reusability tier of the study they "
              "came from. Tier 1 carries biological annotation in the repository itself; Tier 2 has "
              "sample names informative enough to recover the biology; Tier 3 has unique sample IDs "
@@ -572,7 +572,7 @@ MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
         "Preprint &middot; in revision at <em>Access Microbiology</em>, 18 February 2026",
         "https://doi.org/10.1099/acmi.0.001187.v1"))}
 
-{note("<b>About the figures.</b> The waffle is drawn from the current tier totals: 3,145 "
+{note("The waffle is drawn from the current tier totals: 3,145 "
       "studies across the four tiers. The funnel and the two yearly panels are still computed "
       "from an earlier export, <code>MMC1_study_data_final.tsv</code> at n=2,046, so their "
       "counts and percentages are proportions of that subset until a per-year table replaces "
