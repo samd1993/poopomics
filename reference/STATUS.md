@@ -1580,3 +1580,15 @@ studies surveyed, and the waffle's 1,013,122 samples sit under those 3,145.
 Still stale: "143,220 total data entries" is 2,046 x 70 from the old export. At 3,145 it would be
 ~220,000, but the true figure depends on variables actually filled, so it was left alone and
 flagged rather than multiplied.
+
+## fifty-first round — the MMC note removed
+
+Asked a third time, and the grounds for holding it are gone: the 3,300-vs-2,046 conflict it
+existed to record is settled (funnel 33,564 -> 3,300 -> 3,145, waffle agreeing).
+
+The one still-true thing it carried — the tier-by-year and sequencing panels come from the older
+2,046 export, so their bars total less than the 3,145 stated above them — **moved into those two
+captions**, a clause each, rather than being dropped. Better placed there anyway: beside the
+figures it describes.
+
+MMC page is now figures -> Papers -> consortium list, no asides. Both deletion threads closed.
