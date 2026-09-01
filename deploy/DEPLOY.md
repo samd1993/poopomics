@@ -1,14 +1,18 @@
 # Deploying poopomics.com
 
-`index.html` in this folder is the whole site: 7.4 MB, one file, every image, figure and font
-asset inlined. The only thing it fetches from the network is Google Fonts. It needs no build
-step, no server-side anything, and no directory structure — any static host will serve it.
+**Upload `../site/`, not this folder.** `site/` is the hosted build: a 2.6 MB `index.html`
+(0.59 MB over the wire) plus an `assets/` folder of images the browser fetches only when it needs
+them. `deploy/index.html` here is the single-file fallback — everything inlined, 7.4 MB, 4.3 MB
+over the wire — kept for anywhere that can only take one file.
 
-Rebuild it with:
+Rebuild both with:
 
 ```bash
-cd ../build && python3 build_site.py && cp poopomics-v1.html ../deploy/index.html
+./publish
 ```
+
+Content — news, roster, institutions — is in `build/content.yaml`. Editing that and running
+`./publish` is the whole loop for adding a student or a paper.
 
 ## What is live today
 
@@ -30,11 +34,11 @@ should not be entering credentials or changing registrar settings.
    - Netlify Drop (`app.netlify.com/drop`) — the shortest path; drag the folder in
    - GitHub Pages — if you would rather the site live in a repo alongside the build scripts
 
-   Upload the *folder*, not just the file, so the host serves `index.html` at `/`.
+   Upload the `site/` folder, so the host serves its `index.html` at `/`.
 
 2. **Check it on the host's own URL first** (`something.pages.dev` / `something.netlify.app`).
-   Load it on a phone as well — it is a 7.4 MB single file, so first paint on a slow connection
-   is the one thing worth watching.
+   Load it on a phone as well. First paint pulls about 1.7 MB — the document, the three face
+   strips and the faces on screen; the other 180 portraits wait until someone opens People.
 
 3. **Point the domain at it**, in the Squarespace domain dashboard:
    - `www` → CNAME to the host's target, replacing `ghs.googlehosted.com`
