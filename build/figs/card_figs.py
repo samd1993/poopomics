@@ -112,7 +112,8 @@ save(fig, "hmtol-card.svg")
 
 # ---------------------------------------------------------- MMC: mini waffle ----
 TIER_COLORS = {1: "#91bfdb", 2: "#fee090", 3: "#fc8d59", 4: "#d73027"}
-counts = {1: 183, 2: 380, 3: 607, 4: 1975}           # tier totals of 31 Aug 2026, n=3,145
+# sample counts per tier, so the card reads the same way as the full waffle on the page
+counts = {1: 39782, 2: 77093, 3: 198987, 4: 697260}
 total = sum(counts.values())
 COLS, ROWS = 46, 10
 cells = COLS * ROWS

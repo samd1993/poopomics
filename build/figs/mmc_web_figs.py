@@ -15,7 +15,8 @@ MMC  = "/Users/samde/Library/CloudStorage/OneDrive-UniversityofCalifornia,SanDie
 
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Patch
+from matplotlib.patches import Rectangle, Patch, PathPatch
+from matplotlib.path import Path
 
 INK, INK2, INK3, HAIR = "#f5f5f7", "#a1a1a6", "#86868b", "#ffffff29"
 PANEL = "#0f1114"
@@ -48,20 +49,30 @@ df = pd.read_csv(os.path.join(MMC, "MMC1_study_data_final.tsv"), sep="\t",
 df["Year"] = df["Year"].astype(int); df["Tier"] = df["Tier"].astype(int)
 # Tier totals supplied directly on 31 Aug 2026, superseding the export for the waffle only.
 # The two yearly panels below still come off the TSV, because nothing per-year came with these.
-TIER_TOTALS = {1: 183, 2: 380, 3: 607, 4: 1975}
+TIER_STUDIES = {1: 183, 2: 380, 3: 607, 4: 1975}
+TIER_SAMPLES = {1: 39782, 2: 77093, 3: 198987, 4: 697260}
 
-counts_t = dict(TIER_TOTALS) if TIER_TOTALS else {t: int((df.Tier == t).sum())
-                                                 for t in (1, 2, 3, 4)}
+counts_t = dict(TIER_SAMPLES)
 N = sum(counts_t.values())
+N_STUDIES = sum(TIER_STUDIES.values())
 reusable = counts_t[1] + counts_t[2]
 
-# ============ 1. one square per study, banded by tier ============
-ROWS = 22
-cols = int(np.ceil(N / ROWS))
+# ============ 1. squares in proportion to samples, banded by tier ============
+# A square per sample would be a million of them, so the grid is a fixed size and each tier takes
+# cells in proportion to the samples it holds. Largest-remainder, so the cells sum exactly.
+ROWS, COLS = 22, 143
+CELLS = ROWS * COLS
+share = {t: counts_t[t] / N for t in (1, 2, 3, 4)}
+cells = {t: int(CELLS * share[t]) for t in (1, 2, 3, 4)}
+for t in sorted((1, 2, 3, 4), key=lambda t: -(CELLS * share[t] - cells[t]))[:CELLS - sum(cells.values())]:
+    cells[t] += 1
+PER_CELL = N / CELLS
+
+cols = COLS
 fig, ax = plt.subplots(figsize=(11.5, 4.4))
 i = 0; edges = []
 for t in (1, 2, 3, 4):
-    for _ in range(counts_t[t]):
+    for _ in range(cells[t]):
         ax.add_patch(Rectangle((i // ROWS, i % ROWS), 0.86, 0.86,
                                facecolor=TIER_COLORS[t], edgecolor="none"))
         i += 1
@@ -75,13 +86,31 @@ for k, (t, edge) in enumerate(zip((1, 2, 3, 4), edges)):
     ax.plot([xm, xm], [ROWS + 0.6, y - 0.4], color=TIER_COLORS[t], lw=0.8, alpha=0.6)
     ax.text(xm, y, "%s · %s%%" % (TIER_SHORT[t], round(counts_t[t] / N * 100, 1)),
             ha="center", va="bottom", fontsize=10.5, color=TIER_COLORS[t], fontweight="bold")
-    ax.text(xm, y - 1.5, "%d studies" % counts_t[t], ha="center", va="bottom",
+    ax.text(xm, y - 1.5, "{:,} samples".format(counts_t[t]), ha="center", va="bottom",
             fontsize=9.5, color=INK3)
     prev = edge
 ax.plot([edges[1], edges[1]], [-0.8, ROWS + 0.6], color=INK, lw=1.0, ls=":")
-ax.text(0, -2.6, "%d of %d studies reusable — %.1f%%" % (reusable, N, reusable / N * 100),
-        fontsize=11, color=INK, va="bottom", ha="left", fontweight="bold")
-ax.set_xlim(-1, cols + 1); ax.set_ylim(-4.0, ROWS + 9.0)
+
+
+def brace(ax, x0, x1, y, depth, color, lw=1.3):
+    """A curly brace opening upward, spanning x0..x1 and pointing down at the midpoint."""
+    mid = (x0 + x1) / 2
+    verts, codes = [], []
+    for end in (x0, x1):
+        verts += [(end, y), (end, y - depth * 0.62), (mid, y - depth * 0.38), (mid, y - depth)]
+        codes += [Path.MOVETO, Path.CURVE4, Path.CURVE4, Path.CURVE4]
+    ax.add_patch(PathPatch(Path(verts, codes), fc="none", ec=color, lw=lw,
+                           clip_on=False, capstyle="round"))
+
+
+lost = counts_t[3] + counts_t[4]
+brace(ax, edges[1], edges[3], -1.2, 2.8, TIER_COLORS[3], lw=1.6)
+ax.text((edges[1] + edges[3]) / 2, -4.6,
+        "{:,} samples lost to lack of metadata — {:.0f}%".format(lost, lost / N * 100),
+        fontsize=11, color=TIER_COLORS[3], ha="center", va="top", fontweight="bold")
+ax.text(0, -7.2, "{:,} of {:,} samples reusable — {:.1f}%".format(reusable, N, reusable / N * 100),
+        fontsize=11, color=INK, va="top", ha="left", fontweight="bold")
+ax.set_xlim(-1, cols + 1); ax.set_ylim(-9.6, ROWS + 9.0)
 ax.set_aspect("equal"); ax.set_xticks([]); ax.set_yticks([])
 for s in ax.spines.values(): s.set_visible(False)
 save(fig, "mmc-reusability-waffle.svg")
@@ -124,9 +153,9 @@ ax.legend(frameon=False, labelcolor=INK2, loc="center right", bbox_to_anchor=(0.
 save(fig, "mmc-sequencing-type.svg")
 
 print("\nfacts for captions:")
-print("  waffle studies: %d   export rows: %d   years %d-%d"
-      % (N, len(df), df.Year.min(), df.Year.max()))
-print("  tiers: %s" % {TIER_SHORT[t]: counts_t[t] for t in (1, 2, 3, 4)})
+print("  waffle: {:,} samples across {:,} studies ({:,.0f} samples per square); "
+      "export rows {:,}".format(N, N_STUDIES, PER_CELL, len(df)))
+print("  tiers (samples): %s" % {TIER_SHORT[t]: counts_t[t] for t in (1, 2, 3, 4)})
 print("  reusable (T1+T2): %d = %.1f%%" % (reusable, reusable / N * 100))
 acc = (~df["AccessionCode"].astype(str).str.strip().str.upper().isin(["", "N/A", "NA"]))
 print("  accession present: %d = %.1f%%" % (acc.sum(), acc.mean() * 100))

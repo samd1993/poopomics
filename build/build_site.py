@@ -165,7 +165,7 @@ def home_view():
       "A decade-scale audit of the field's own record-keeping: most published microbiome data is "
       "public, but not reusable.",
       svg("figs/cards/mmc-card.svg", "p-motif-svg"),
-      [("3,300", "studies"), ("600k+", "samples"),
+      [("3,300", "studies"), ("1M+", "samples"),
        ("450", "students, 19 institutions")])}
 {card("hmtol", "2024&ndash;present", "Human Microbiome Tree of Life (HMToL)",
       "The human-focused successor: a global collection that deliberately reaches the populations "
@@ -547,10 +547,12 @@ MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
 
 {figs(figure(svg("figs/mmc/mmc-reusability-waffle.svg"),
              "Every study we read, sorted by how far you can get with its data",
-             "One square per study. Tier 1 carries biological annotation in the repository itself; "
-             "Tier 2 has sample names informative enough to recover the biology; Tier 3 has unique "
-             "sample IDs but no biology; Tier 4 cannot be reused at all. Only Tiers 1 and 2 support "
-             "reuse without going back to the manuscript &mdash; 563 studies of 3,145.",
+             "One square is about 320 samples, banded by the reusability tier of the study they "
+             "came from. Tier 1 carries biological annotation in the repository itself; Tier 2 has "
+             "sample names informative enough to recover the biology; Tier 3 has unique sample IDs "
+             "but no biology; Tier 4 cannot be reused at all. Only Tiers 1 and 2 support reuse "
+             "without going back to the manuscript &mdash; 116,875 samples of 1,013,122, or 11.5%. "
+             "The other 896,247 are lost to missing metadata.",
              kicker="Reusability", span="full"))}
 
 {figs(
@@ -574,7 +576,7 @@ MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
       "studies across the four tiers. The funnel and the two yearly panels are still computed "
       "from an earlier export, <code>MMC1_study_data_final.tsv</code> at n=2,046, so their "
       "counts and percentages are proportions of that subset until a per-year table replaces "
-      "it.")}'''
+      "it. The waffle is at sample level: 1,013,122 samples across 3,145 studies.")}'''
 
 
 # ---------------------------------------------------------------- styling ----

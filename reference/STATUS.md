@@ -1501,3 +1501,50 @@ instead of arguing that one of two sources must be wrong. The deletion request f
 and unactioned.
 
 `deploy/index.html` refreshed from the current build.
+
+## forty-seventh round — new tier totals, git, content.yaml, a lighter site
+
+**Waffle on the supplied totals.** `TIER_TOTALS = {1:183, 2:380, 3:607, 4:1975}` overrides the
+export for that figure only (the yearly panels have no new per-year data). n = **3,145**, reusable
+563 = 17.9%. Card mini-waffle and the caption follow. The share column in Sam's table is by
+**samples**, not studies — it checks out against his sample counts, so it was not used for the
+waffle, which is one square per study.
+
+**Three numbers still need Sam:** his totals sum to **3,145**, not the 3,300 headline; his sample
+column sums to **1,013,122**, while the card says "600k+"; and "counted / filled" (1,111 / 2,034)
+is a split I have no meaning for, so it is unused.
+
+**Git.** Repo initialised, three commits, 16 MB. `src/` (270 MB of originals) ignored; the 6 MB of
+derived crops tracked so a clone builds. Build outputs and `site/` ignored.
+
+**content.yaml.** News, roster, institutions, team labels and `PEOPLE` moved out of the 1,318-line
+script. Generated *from the live objects* and then verified: with image blobs and the new
+lazy-loading attributes normalised away, the markup is byte-identical. Adding a student is now
+four lines of YAML.
+
+**Weight.** `build_site.py --site` writes `site/index.html` plus hashed asset files instead of
+base64. **4.31 MB gzipped -> 0.59 MB** for the document; first load ~1.7 MB (document, three face
+strips, on-screen faces) because a CSS background on a hidden view is never fetched — the other
+180 portraits wait for the People sheet. Face strips re-encoded q80 -> q68 (-200 KB). Stale
+hashed assets are cleared each build. `./publish` does both builds.
+
+Sadaf Moradi's photo arrived as `Sodaf Moradi.jpg`; in under the correct spelling, 386px crop.
+
+## forty-eighth round — the waffle goes sample-level
+
+- `TIER_SAMPLES = {1:39782, 2:77093, 3:198987, 4:697260}` drives the waffle now; `TIER_STUDIES`
+  is kept for the study count. A million squares is not a grid, so the grid is fixed at 22x143
+  and each tier takes cells in proportion to its samples (largest remainder, so they sum exactly).
+  **One square ~ 320 samples.** Bands land on 3.9 / 7.6 / 19.6 / 68.8%, matching Sam's share
+  column — which is what that column was for.
+- New `brace()` helper: two cubic Beziers meeting at the midpoint, drawn under Tiers 3-4, labelled
+  "896,247 samples lost to lack of metadata — 88%". First attempt was too shallow to read as a
+  brace at that width (depth 1.6 over ~110 columns); depth 2.8, lw 1.6 fixed it.
+- **Reusable falls from 17.9% (studies) to 11.5% (samples)** — a materially stronger claim, worth
+  Sam checking before publication.
+- Knock-ons taken rather than left inconsistent: card mini-waffle on the same sample proportions,
+  and the card stat "600k+" -> "1M+" since the tier samples total 1,013,122 and the figure beside
+  it now says so.
+
+Still unanswered: study totals sum to **3,145** vs the 3,300 headline, and "counted / filled"
+remains unused.
