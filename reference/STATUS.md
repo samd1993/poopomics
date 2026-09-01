@@ -1564,3 +1564,19 @@ count it belongs on the third step instead. Also the two steps to its right are 
 
 The page now carries 3,145 (waffle) and 3,300 (funnel, card, caption) side by side, both at Sam's
 instruction.
+
+## fiftieth round — the funnel finally agrees with the waffle
+
+"3l45" read as **3,145**: the node was the human-health step at 2,046, and 3,145 is the count the
+waffle already uses, so it was the one substitution that made the page consistent. Funnel now runs
+33,564 -> 3,300 -> 3,145.
+
+Caption moved with it — it had called 3,300 the human-health count. Now: "From 33,564 candidate
+articles down to 3,300 after filtering and the 3,145 human-health studies read in full".
+
+**Resolves the long-running 2,046 vs 3,300 conflict**: 3,300 is the filtered set, 3,145 the
+studies surveyed, and the waffle's 1,013,122 samples sit under those 3,145.
+
+Still stale: "143,220 total data entries" is 2,046 x 70 from the old export. At 3,145 it would be
+~220,000, but the true figure depends on variables actually filled, so it was left alone and
+flagged rather than multiplied.

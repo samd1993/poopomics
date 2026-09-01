@@ -540,7 +540,8 @@ HMTOL = f'''<section class="p-intro">
 
 MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
              None,
-             "From 33,564 candidate articles down to the 3,300 human-health articles read in full, "
+             "From 33,564 candidate articles down to 3,300 after filtering and the 3,145 human-health "
+             "studies read in full, "
              "with roughly 70 variables recorded per article — 143,220 data entries, curated by a "
              "consortium of about 300 professors, postdocs, graduate and undergraduate students.",
              span="full"))}
