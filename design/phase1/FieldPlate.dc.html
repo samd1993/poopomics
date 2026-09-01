@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&display=swap">
+  <style>
+    body { margin: 0; background: #f2ece0; }
+    a { color: #9c4f2f; text-decoration: none; }
+    a:hover { color: #7d3d22; }
+    .plate { transition: background .35s ease, border-color .35s ease, box-shadow .35s ease; }
+    .plate:hover { background: #fffdf7; border-color: #23201b; box-shadow: 0 18px 40px -26px #23201b80; }
+    .plate:hover .plate-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+    .plate:hover .num { color: #9c4f2f; }
+    .num { transition: color .35s ease; }
+    .nav a { color: #23201b; }
+    .nav a:hover { color: #9c4f2f; }
+  </style>
+</helmet>
+<div style="width: 1280px; background: #f2ece0; font-family: Newsreader, Georgia, 'Times New Roman', serif; color: #23201b; -webkit-font-smoothing: antialiased">
+
+  <header style="padding: 30px 64px 0">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px">
+      <div style="font: 400 11px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.24em; text-transform: uppercase">Est.&nbsp;2023</div>
+      <nav class="nav" style="display: flex; gap: 30px; font: 400 12px/1 Newsreader, Georgia, serif; letter-spacing: 0.16em; text-transform: uppercase">
+        <a href="#">Projects</a>
+        <a href="#">People</a>
+        <a href="#">Publications</a>
+      </nav>
+    </div>
+    <div style="border-top: 1px solid #23201b; border-bottom: 3px double #23201b; padding: 26px 0 22px; text-align: center">
+      <div style="font: 400 46px/1 'Instrument Serif', Georgia, serif; letter-spacing: 0.02em">poopomics</div>
+      <div style="margin-top: 14px; font: 400 10.5px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.28em; text-transform: uppercase">UC San Diego &nbsp;&mdash;&nbsp; Northwestern &nbsp;&mdash;&nbsp; Johns Hopkins</div>
+    </div>
+  </header>
+
+  <section style="display: grid; grid-template-columns: 1.55fr 1fr; gap: 56px; align-items: end; padding: 52px 64px 46px">
+    <h1 style="margin: 0; font: 400 60px/1.04 'Instrument Serif', Georgia, serif; letter-spacing: -0.01em; text-wrap: pretty">A natural history of the gut, assembled from everything already published.</h1>
+    <p style="margin: 0 0 8px; font: 300 16px/1.68 Newsreader, Georgia, serif; color: #6f675a; text-wrap: pretty">Seventeen thousand gut microbiomes, eight hundred host species, and a field-wide audit of whether any of it can be reused. Three projects, one library.</p>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; padding: 0 64px 44px">
+    <a href="#" class="plate" style="display: flex; flex-direction: column; padding: 26px 24px 22px; background: #faf6ec; border: 1px solid #23201b33">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 26px">
+        <span class="num" style="font: 400 15px/1 'Instrument Serif', Georgia, serif; color: #6f675a; letter-spacing: 0.18em">I.</span>
+        <span style="font: 400 10.5px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.2em; text-transform: uppercase">GMToL</span>
+      </div>
+      <div style="margin-bottom: 14px"><svg viewBox="0 0 260 132" width="100%" height="132" aria-hidden="true"><g stroke="#23201b" stroke-width="0.9" fill="none" opacity="0.85" stroke-linecap="round"><path d="M 130.0 126.0 L 82.0 120.2 L 20.8 112.7"/><path d="M 130.0 126.0 L 84.7 108.8 L 27.1 87.0"/><path d="M 130.0 126.0 L 90.2 98.5 L 39.5 63.5"/><path d="M 130.0 126.0 L 97.9 89.8 L 57.1 43.7"/><path d="M 130.0 126.0 L 107.5 83.1 L 78.9 28.6"/><path d="M 130.0 126.0 L 118.4 79.0 L 103.7 19.2"/><path d="M 130.0 126.0 L 130.0 77.6 L 130.0 16.0"/><path d="M 130.0 126.0 L 141.6 79.0 L 156.3 19.2"/><path d="M 130.0 126.0 L 152.5 83.1 L 181.1 28.6"/><path d="M 130.0 126.0 L 162.1 89.8 L 202.9 43.7"/><path d="M 130.0 126.0 L 169.8 98.5 L 220.5 63.5"/><path d="M 130.0 126.0 L 175.3 108.8 L 232.9 87.0"/><path d="M 130.0 126.0 L 178.0 120.2 L 239.2 112.7"/><path d="M 20.0 126.0 A 110.0 110.0 0 0 1 240.0 126.0" opacity="0.35" stroke-dasharray="2 4"/></g><rect x="18.3" y="110.2" width="5" height="5" fill="#23201b"/><rect x="24.6" y="84.5" width="5" height="5" fill="#9c4f2f"/><rect x="37.0" y="61.0" width="5" height="5" fill="#4d5b3a"/><rect x="54.6" y="41.2" width="5" height="5" fill="#8a7a4e"/><rect x="76.4" y="26.1" width="5" height="5" fill="#23201b"/><rect x="101.2" y="16.7" width="5" height="5" fill="#23201b"/><rect x="127.5" y="13.5" width="5" height="5" fill="#9c4f2f"/><rect x="153.8" y="16.7" width="5" height="5" fill="#4d5b3a"/><rect x="178.6" y="26.1" width="5" height="5" fill="#8a7a4e"/><rect x="200.4" y="41.2" width="5" height="5" fill="#23201b"/><rect x="218.0" y="61.0" width="5" height="5" fill="#23201b"/><rect x="230.4" y="84.5" width="5" height="5" fill="#9c4f2f"/><rect x="236.7" y="110.2" width="5" height="5" fill="#4d5b3a"/></svg></div>
+      <div style="font: italic 300 12.5px/1.5 Newsreader, Georgia, serif; color: #6f675a; text-align: center; padding: 0 6px">Plate I. Host phylogeny, time-calibrated, with phylum composition at the tips.</div>
+      <div class="plate-title" style="margin: 26px 0 12px; font: 400 27px/1.12 'Instrument Serif', Georgia, serif; color: #23201b; letter-spacing: -0.005em; text-wrap: pretty">Gut Microbiome Tree of Life</div>
+      <div style="font: 300 14.5px/1.62 Newsreader, Georgia, serif; color: #6f675a; margin-bottom: 22px; text-wrap: pretty">Gut microbiomes compiled across the animal kingdom, from chordates to arthropods to annelids, curated for even coverage of phylogeny, diet, ecology and geography.</div>
+      <div style="margin-top: auto; border-top: 1px solid #23201b33; padding-top: 4px"><div style="display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted #23201b40"><span style="font: 400 11px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.12em; text-transform: uppercase">Samples</span><span style="font: 500 15px/1 Newsreader, Georgia, serif; color: #23201b">17,000</span></div><div style="display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted #23201b40"><span style="font: 400 11px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.12em; text-transform: uppercase">Host species</span><span style="font: 500 15px/1 Newsreader, Georgia, serif; color: #23201b">828</span></div></div>
+    </a>
+    <a href="#" class="plate" style="display: flex; flex-direction: column; padding: 26px 24px 22px; background: #faf6ec; border: 1px solid #23201b33">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 26px">
+        <span class="num" style="font: 400 15px/1 'Instrument Serif', Georgia, serif; color: #6f675a; letter-spacing: 0.18em">II.</span>
+        <span style="font: 400 10.5px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.2em; text-transform: uppercase">HMToL</span>
+      </div>
+      <div style="margin-bottom: 14px"><svg viewBox="0 0 260 132" width="100%" height="132" aria-hidden="true"><g stroke="#23201b" fill="none" stroke-width="0.9" opacity="0.7"><circle cx="130.0" cy="66.0" r="58.0"/><ellipse cx="130.0" cy="66.0" rx="16.2" ry="58.0"/><ellipse cx="130.0" cy="66.0" rx="36.0" ry="58.0"/><ellipse cx="130.0" cy="66.0" rx="52.2" ry="58.0"/><path d="M 84.5 30.0 L 175.5 30.0"/><path d="M 74.7 48.6 L 185.3 48.6"/><path d="M 72.0 66.0 L 188.0 66.0"/><path d="M 74.7 83.4 L 185.3 83.4"/><path d="M 84.5 102.0 L 175.5 102.0"/></g><circle cx="98.1" cy="41.6" r="2.6" fill="#9c4f2f"/><circle cx="112.6" cy="34.1" r="2.6" fill="#9c4f2f"/><circle cx="124.2" cy="54.4" r="2.6" fill="#9c4f2f"/><circle cx="142.8" cy="38.2" r="2.6" fill="#9c4f2f"/><circle cx="157.8" cy="53.2" r="2.6" fill="#9c4f2f"/><circle cx="164.8" cy="76.4" r="2.6" fill="#9c4f2f"/><circle cx="147.4" cy="89.2" r="2.6" fill="#9c4f2f"/><circle cx="128.8" cy="99.6" r="2.6" fill="#9c4f2f"/><circle cx="110.3" cy="85.7" r="2.6" fill="#9c4f2f"/><circle cx="94.0" cy="68.9" r="2.6" fill="#9c4f2f"/><circle cx="132.9" cy="63.1" r="2.6" fill="#9c4f2f"/><circle cx="119.6" cy="71.8" r="2.6" fill="#9c4f2f"/><circle cx="152.0" cy="67.2" r="2.6" fill="#9c4f2f"/><circle cx="138.1" cy="79.9" r="2.6" fill="#9c4f2f"/></svg></div>
+      <div style="font: italic 300 12.5px/1.5 Newsreader, Georgia, serif; color: #6f675a; text-align: center; padding: 0 6px">Plate II. Global coverage of the human collection to date.</div>
+      <div class="plate-title" style="margin: 26px 0 12px; font: 400 27px/1.12 'Instrument Serif', Georgia, serif; color: #23201b; letter-spacing: -0.005em; text-wrap: pretty">Human Microbiome Tree of Life</div>
+      <div style="font: 300 14.5px/1.62 Newsreader, Georgia, serif; color: #6f675a; margin-bottom: 22px; text-wrap: pretty">The human-focused successor: a global gut microbiome atlas that deliberately reaches the populations the literature has left out.</div>
+      <div style="margin-top: auto; border-top: 1px solid #23201b33; padding-top: 4px"><div style="display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted #23201b40"><span style="font: 400 11px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.12em; text-transform: uppercase">Studies</span><span style="font: 500 15px/1 Newsreader, Georgia, serif; color: #23201b">170</span></div><div style="display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted #23201b40"><span style="font: 400 11px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.12em; text-transform: uppercase">Countries</span><span style="font: 500 15px/1 Newsreader, Georgia, serif; color: #23201b">79</span></div></div>
+    </a>
+    <a href="#" class="plate" style="display: flex; flex-direction: column; padding: 26px 24px 22px; background: #faf6ec; border: 1px solid #23201b33">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 26px">
+        <span class="num" style="font: 400 15px/1 'Instrument Serif', Georgia, serif; color: #6f675a; letter-spacing: 0.18em">III.</span>
+        <span style="font: 400 10.5px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.2em; text-transform: uppercase">MMC</span>
+      </div>
+      <div style="margin-bottom: 14px"><svg viewBox="0 0 260 132" width="100%" height="132" aria-hidden="true"><rect x="2.0" y="2.0" width="18.3" height="18.3" fill="#9c4f2f" opacity="1"/><rect x="23.3" y="2.0" width="18.3" height="18.3" fill="#9c4f2f" opacity="1"/><rect x="44.7" y="2.0" width="18.3" height="18.3" fill="#9c4f2f" opacity="1"/><rect x="66.0" y="2.0" width="18.3" height="18.3" fill="#9c4f2f" opacity="1"/><rect x="87.3" y="2.0" width="18.3" height="18.3" fill="#9c4f2f" opacity="1"/><rect x="108.7" y="2.0" width="18.3" height="18.3" fill="#9c4f2f" opacity="1"/><rect x="130.0" y="2.0" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="151.3" y="2.0" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="172.7" y="2.0" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="194.0" y="2.0" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="215.3" y="2.0" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="236.7" y="2.0" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="2.0" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="23.3" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="44.7" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="66.0" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="87.3" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="108.7" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="130.0" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="151.3" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="172.7" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="194.0" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="215.3" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="236.7" y="27.6" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="2.0" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="23.3" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="44.7" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="66.0" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="87.3" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="108.7" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="130.0" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="151.3" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="172.7" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="194.0" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="215.3" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="236.7" y="53.2" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="2.0" y="78.8" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="23.3" y="78.8" width="18.3" height="18.3" fill="#b9a98b" opacity="1"/><rect x="44.7" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="66.0" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="87.3" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="108.7" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="130.0" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="151.3" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="172.7" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="194.0" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="215.3" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="236.7" y="78.8" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="2.0" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="23.3" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="44.7" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="66.0" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="87.3" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="108.7" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="130.0" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="151.3" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="172.7" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="194.0" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="215.3" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/><rect x="236.7" y="104.4" width="18.3" height="18.3" fill="#e2dac9" opacity="1"/></svg></div>
+      <div style="font: italic 300 12.5px/1.5 Newsreader, Georgia, serif; color: #6f675a; text-align: center; padding: 0 6px">Plate III. Of 60 studies, those with accessions, and those truly reusable.</div>
+      <div class="plate-title" style="margin: 26px 0 12px; font: 400 27px/1.12 'Instrument Serif', Georgia, serif; color: #23201b; letter-spacing: -0.005em; text-wrap: pretty">Microbiome Metadata Crisis</div>
+      <div style="font: 300 14.5px/1.62 Newsreader, Georgia, serif; color: #6f675a; margin-bottom: 22px; text-wrap: pretty">A systematic review of the field's own record-keeping. Most published microbiome data is public but not reusable; we measured how much, and what it would take to fix.</div>
+      <div style="margin-top: auto; border-top: 1px solid #23201b33; padding-top: 4px"><div style="display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted #23201b40"><span style="font: 400 11px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.12em; text-transform: uppercase">Papers reviewed</span><span style="font: 500 15px/1 Newsreader, Georgia, serif; color: #23201b">2,300</span></div><div style="display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted #23201b40"><span style="font: 400 11px/1 Newsreader, Georgia, serif; color: #6f675a; letter-spacing: 0.12em; text-transform: uppercase">Reusable</span><span style="font: 500 15px/1 Newsreader, Georgia, serif; color: #23201b">10.8%</span></div></div>
+    </a>
+  </section>
+
+  <footer style="border-top: 1px solid #23201b; margin: 0 64px; padding: 18px 0 32px; display: flex; justify-content: space-between; align-items: baseline; font: 300 12.5px/1 Newsreader, Georgia, serif; color: #6f675a">
+    <div>DeGregori et&nbsp;al. 2024 &nbsp;&mdash;&nbsp; <em>Biological Reviews</em> &nbsp;&mdash;&nbsp; <a href="#">Gut microbiomes across the tree of life</a></div>
+    <div style="letter-spacing: 0.14em; text-transform: uppercase">@poopomics</div>
+  </footer>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

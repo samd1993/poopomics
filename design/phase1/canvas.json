@@ -1,0 +1,61 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "title": "A — Instrument (dark)",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 1112
+    },
+    {
+      "file": "FieldPlate.dc.html",
+      "title": "B — Field plate (warm)",
+      "x": 1400,
+      "y": 0,
+      "w": 1280,
+      "h": 1104
+    },
+    {
+      "file": "SpecimenGrid.dc.html",
+      "title": "C — Specimen grid (stark)",
+      "x": 2800,
+      "y": 0,
+      "w": 1280,
+      "h": 914
+    }
+  ],
+  "annotations": [
+    {
+      "id": "note-a",
+      "x": 0,
+      "y": -210,
+      "w": 420,
+      "text": "A — INSTRUMENT (dark)\n\nDirect descendant of the AGP report prototype: same near-black stage, Mulish, blue accent, amber highlight. Cards are dense instrument panels; each carries a real figure motif.\n\nFor: continuity with the AGP/Microsetta visual family, and it makes the data feel live.\nAgainst: dark sites are harder for a people-heavy, undergrad-facing site; figures exported from R/Python are almost all white-background and will need re-rendering to sit on it."
+    },
+    {
+      "id": "note-b",
+      "x": 1400,
+      "y": -210,
+      "w": 420,
+      "text": "B — FIELD PLATE (warm)\n\nNatural-history publication: cream paper, Instrument Serif masthead, the three projects as numbered plates with captions under each illustration.\n\nFor: the tree-of-life subject matter earns it, it reads as scholarly rather than startup, and existing white-background figures drop straight in.\nAgainst: least like the AGP prototype; serif display can read old-fashioned, and the plate frame gets crowded once real figures replace the motifs."
+    },
+    {
+      "id": "note-c",
+      "x": 2800,
+      "y": -210,
+      "w": 420,
+      "text": "C — SPECIMEN GRID (stark)\n\nUtilitarian: hairline grid, IBM Plex Mono labels, three full-height columns that invert to solid ink on hover. No illustration — numbers and structure carry it.\n\nFor: the MMC audit story is fundamentally about record-keeping, and this looks like a catalogue; also the cheapest to extend to People and Publications tables.\nAgainst: coldest of the three, and least distinctive as a memory — it borrows a common look."
+    },
+    {
+      "id": "note-open",
+      "x": 0,
+      "y": 1250,
+      "w": 900,
+      "text": "SHARED ACROSS ALL THREE (decisions already locked in the handoff)\n\n· Header lists all three institutions — UC San Diego, Northwestern, Johns Hopkins.\n· A real front page: the three project cards ARE the primary navigation, with a pronounced hover.\n· Nav reorganised around the three projects; the old Research page distributes into GMToL and HMToL.\n· Publications is one entry: DeGregori et al. 2024, Biological Reviews, doi 10.1111/brv.13161.\n\nSTILL OPEN — needs your call before Phase 2\n· What lands under GMToL vs HMToL vs MMC, and where People and Publications sit relative to them.\n· Every number on these cards is from the legacy site copy (17,000 samples / 828 host species / 170 studies / 79 countries / 2,300 papers / 10.8% reusable). The coverage bars in C are illustrative — the 62% and 41% are placeholders, not measured.\n· HMToL has no legacy page of its own, so its blurb here is written from the handoff's framing as the human-focused successor. Check the wording."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

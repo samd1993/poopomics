@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300..900;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #0b0c0e; }
+    a { color: #2997ff; text-decoration: none; }
+    a:hover { color: #47a6ff; }
+    .card { transition: transform .3s cubic-bezier(.2,.7,.2,1), border-color .3s, box-shadow .3s, background .3s; }
+    .card:hover { transform: translateY(-7px); border-color: #ffffff40; background: #1d2024;
+                  box-shadow: 0 1px 2px #00000066, 0 34px 64px -22px #000000; }
+    .card:hover .go { transform: translateX(7px); opacity: 1; }
+    .card:hover .rule { width: 100%; }
+    .go { transition: transform .3s cubic-bezier(.2,.7,.2,1), opacity .3s; opacity: .5; }
+    .rule { transition: width .45s cubic-bezier(.2,.7,.2,1); }
+    .nav a { color: #a1a1a6; }
+    .nav a:hover { color: #f5f5f7; }
+  </style>
+</helmet>
+<div style="width: 1280px; background: radial-gradient(130% 120% at 50% -8%, #16181c 0%, #0b0c0e 60%); font-family: Mulish, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #f5f5f7; -webkit-font-smoothing: antialiased">
+
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 22px 56px; border-bottom: 1px solid #ffffff14">
+    <div style="display: flex; flex-direction: column; gap: 5px">
+      <div style="font: 800 19px/1 Mulish, sans-serif; letter-spacing: -0.02em">poopomics</div>
+      <div style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.1em; text-transform: uppercase">UC San Diego &nbsp;·&nbsp; Northwestern &nbsp;·&nbsp; Johns Hopkins</div>
+    </div>
+    <nav class="nav" style="display: flex; gap: 30px; font: 400 13.5px/1 Mulish, sans-serif">
+      <a href="#">Projects</a>
+      <a href="#">People</a>
+      <a href="#">Publications</a>
+    </nav>
+  </header>
+
+  <section style="padding: 74px 56px 46px">
+    <div style="font: 500 10.5px/1 'IBM Plex Mono', monospace; color: #f0b429; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 22px">Knight Lab &nbsp;/&nbsp; Amato Lab</div>
+    <h1 style="margin: 0; max-width: 880px; font: 800 57px/1.03 Mulish, sans-serif; letter-spacing: -0.035em; text-wrap: pretty">Every gut microbiome ever published, in one comparable dataset.</h1>
+    <p style="margin: 22px 0 0; max-width: 640px; font: 400 17px/1.6 Mulish, sans-serif; color: #c7c7cc; text-wrap: pretty">Three projects, one aim: make the world's microbiome data actually usable — across the animal tree of life, across human populations, and across the literature itself.</p>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 0 56px 40px">
+    <a href="#" class="card" style="position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 26px 26px 24px; background: #141619; border: 1px solid #ffffff14; border-radius: 18px; box-shadow: 0 1px 2px #00000066, 0 12px 34px -14px #000000cc">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start">
+        <div style="font: 500 11px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.12em">01</div>
+        <svg class="go" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg>
+      </div>
+      <div style="margin: 20px 0 22px"><svg viewBox="0 0 260 132" width="100%" height="132" aria-hidden="true"><g stroke="#6f8ba8" stroke-width="1.0" fill="none" opacity="0.8" stroke-linecap="round"><path d="M 130.0 126.0 L 82.0 120.2 L 20.8 112.7"/><path d="M 130.0 126.0 L 84.7 108.8 L 27.1 87.0"/><path d="M 130.0 126.0 L 90.2 98.5 L 39.5 63.5"/><path d="M 130.0 126.0 L 97.9 89.8 L 57.1 43.7"/><path d="M 130.0 126.0 L 107.5 83.1 L 78.9 28.6"/><path d="M 130.0 126.0 L 118.4 79.0 L 103.7 19.2"/><path d="M 130.0 126.0 L 130.0 77.6 L 130.0 16.0"/><path d="M 130.0 126.0 L 141.6 79.0 L 156.3 19.2"/><path d="M 130.0 126.0 L 152.5 83.1 L 181.1 28.6"/><path d="M 130.0 126.0 L 162.1 89.8 L 202.9 43.7"/><path d="M 130.0 126.0 L 169.8 98.5 L 220.5 63.5"/><path d="M 130.0 126.0 L 175.3 108.8 L 232.9 87.0"/><path d="M 130.0 126.0 L 178.0 120.2 L 239.2 112.7"/><path d="M 20.0 126.0 A 110.0 110.0 0 0 1 240.0 126.0" opacity="0.35" stroke-dasharray="2 4"/></g><rect x="18.3" y="110.2" width="5" height="5" fill="#6f8ba8"/><rect x="24.6" y="84.5" width="5" height="5" fill="#2997ff"/><rect x="37.0" y="61.0" width="5" height="5" fill="#f0b429"/><rect x="54.6" y="41.2" width="5" height="5" fill="#7fb069"/><rect x="76.4" y="26.1" width="5" height="5" fill="#c66b6b"/><rect x="101.2" y="16.7" width="5" height="5" fill="#6f8ba8"/><rect x="127.5" y="13.5" width="5" height="5" fill="#2997ff"/><rect x="153.8" y="16.7" width="5" height="5" fill="#f0b429"/><rect x="178.6" y="26.1" width="5" height="5" fill="#7fb069"/><rect x="200.4" y="41.2" width="5" height="5" fill="#c66b6b"/><rect x="218.0" y="61.0" width="5" height="5" fill="#6f8ba8"/><rect x="230.4" y="84.5" width="5" height="5" fill="#2997ff"/><rect x="236.7" y="110.2" width="5" height="5" fill="#f0b429"/></svg></div>
+      <div style="font: 500 10.5px/1 'IBM Plex Mono', monospace; color: #2997ff; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 9px">GMToL</div>
+      <div style="font: 800 25px/1.1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.025em; margin-bottom: 11px; text-wrap: pretty">Gut Microbiome Tree of Life</div>
+      <div style="font: 400 13.5px/1.55 Mulish, sans-serif; color: #a1a1a6; margin-bottom: 22px; text-wrap: pretty">Gut microbiomes compiled across the animal kingdom &mdash; chordates to arthropods to annelids &mdash; and curated for even coverage of phylogeny, diet, ecology and geography.</div>
+      <div style="margin-top: auto; display: flex; gap: 26px; padding-top: 16px; border-top: 1px solid #ffffff14">
+        <div style="display: flex; flex-direction: column; gap: 3px"><div style="font: 700 19px/1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.02em">17,000</div><div style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.1em; text-transform: uppercase">samples</div></div><div style="display: flex; flex-direction: column; gap: 3px"><div style="font: 700 19px/1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.02em">828</div><div style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.1em; text-transform: uppercase">host species</div></div>
+      </div>
+      <div class="rule" style="position: absolute; left: 0; bottom: 0; height: 2px; width: 32%; background: #2997ff"></div>
+    </a>
+    <a href="#" class="card" style="position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 26px 26px 24px; background: #141619; border: 1px solid #ffffff14; border-radius: 18px; box-shadow: 0 1px 2px #00000066, 0 12px 34px -14px #000000cc">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start">
+        <div style="font: 500 11px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.12em">02</div>
+        <svg class="go" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg>
+      </div>
+      <div style="margin: 20px 0 22px"><svg viewBox="0 0 260 132" width="100%" height="132" aria-hidden="true"><g stroke="#6f8ba8" fill="none" stroke-width="1.0" opacity="0.7"><circle cx="130.0" cy="66.0" r="58.0"/><ellipse cx="130.0" cy="66.0" rx="16.2" ry="58.0"/><ellipse cx="130.0" cy="66.0" rx="36.0" ry="58.0"/><ellipse cx="130.0" cy="66.0" rx="52.2" ry="58.0"/><path d="M 84.5 30.0 L 175.5 30.0"/><path d="M 74.7 48.6 L 185.3 48.6"/><path d="M 72.0 66.0 L 188.0 66.0"/><path d="M 74.7 83.4 L 185.3 83.4"/><path d="M 84.5 102.0 L 175.5 102.0"/></g><circle cx="98.1" cy="41.6" r="2.6" fill="#f0b429"/><circle cx="112.6" cy="34.1" r="2.6" fill="#f0b429"/><circle cx="124.2" cy="54.4" r="2.6" fill="#f0b429"/><circle cx="142.8" cy="38.2" r="2.6" fill="#f0b429"/><circle cx="157.8" cy="53.2" r="2.6" fill="#f0b429"/><circle cx="164.8" cy="76.4" r="2.6" fill="#f0b429"/><circle cx="147.4" cy="89.2" r="2.6" fill="#f0b429"/><circle cx="128.8" cy="99.6" r="2.6" fill="#f0b429"/><circle cx="110.3" cy="85.7" r="2.6" fill="#f0b429"/><circle cx="94.0" cy="68.9" r="2.6" fill="#f0b429"/><circle cx="132.9" cy="63.1" r="2.6" fill="#f0b429"/><circle cx="119.6" cy="71.8" r="2.6" fill="#f0b429"/><circle cx="152.0" cy="67.2" r="2.6" fill="#f0b429"/><circle cx="138.1" cy="79.9" r="2.6" fill="#f0b429"/></svg></div>
+      <div style="font: 500 10.5px/1 'IBM Plex Mono', monospace; color: #2997ff; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 9px">HMToL</div>
+      <div style="font: 800 25px/1.1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.025em; margin-bottom: 11px; text-wrap: pretty">Human Microbiome Tree of Life</div>
+      <div style="font: 400 13.5px/1.55 Mulish, sans-serif; color: #a1a1a6; margin-bottom: 22px; text-wrap: pretty">The human-focused successor: a global gut microbiome atlas that deliberately reaches the populations the literature has left out.</div>
+      <div style="margin-top: auto; display: flex; gap: 26px; padding-top: 16px; border-top: 1px solid #ffffff14">
+        <div style="display: flex; flex-direction: column; gap: 3px"><div style="font: 700 19px/1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.02em">170</div><div style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.1em; text-transform: uppercase">studies</div></div><div style="display: flex; flex-direction: column; gap: 3px"><div style="font: 700 19px/1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.02em">79</div><div style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.1em; text-transform: uppercase">countries</div></div>
+      </div>
+      <div class="rule" style="position: absolute; left: 0; bottom: 0; height: 2px; width: 32%; background: #2997ff"></div>
+    </a>
+    <a href="#" class="card" style="position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 26px 26px 24px; background: #141619; border: 1px solid #ffffff14; border-radius: 18px; box-shadow: 0 1px 2px #00000066, 0 12px 34px -14px #000000cc">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start">
+        <div style="font: 500 11px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.12em">03</div>
+        <svg class="go" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg>
+      </div>
+      <div style="margin: 20px 0 22px"><svg viewBox="0 0 260 132" width="100%" height="132" aria-hidden="true"><rect x="2.0" y="2.0" width="18.3" height="18.3" fill="#f0b429" opacity="1"/><rect x="23.3" y="2.0" width="18.3" height="18.3" fill="#f0b429" opacity="1"/><rect x="44.7" y="2.0" width="18.3" height="18.3" fill="#f0b429" opacity="1"/><rect x="66.0" y="2.0" width="18.3" height="18.3" fill="#f0b429" opacity="1"/><rect x="87.3" y="2.0" width="18.3" height="18.3" fill="#f0b429" opacity="1"/><rect x="108.7" y="2.0" width="18.3" height="18.3" fill="#f0b429" opacity="1"/><rect x="130.0" y="2.0" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="151.3" y="2.0" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="172.7" y="2.0" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="194.0" y="2.0" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="215.3" y="2.0" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="236.7" y="2.0" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="2.0" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="23.3" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="44.7" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="66.0" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="87.3" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="108.7" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="130.0" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="151.3" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="172.7" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="194.0" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="215.3" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="236.7" y="27.6" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="2.0" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="23.3" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="44.7" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="66.0" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="87.3" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="108.7" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="130.0" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="151.3" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="172.7" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="194.0" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="215.3" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="236.7" y="53.2" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="2.0" y="78.8" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="23.3" y="78.8" width="18.3" height="18.3" fill="#3d4a5c" opacity="1"/><rect x="44.7" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="66.0" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="87.3" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="108.7" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="130.0" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="151.3" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="172.7" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="194.0" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="215.3" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="236.7" y="78.8" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="2.0" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="23.3" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="44.7" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="66.0" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="87.3" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="108.7" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="130.0" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="151.3" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="172.7" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="194.0" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="215.3" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/><rect x="236.7" y="104.4" width="18.3" height="18.3" fill="#22252b" opacity="1"/></svg></div>
+      <div style="font: 500 10.5px/1 'IBM Plex Mono', monospace; color: #2997ff; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 9px">MMC</div>
+      <div style="font: 800 25px/1.1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.025em; margin-bottom: 11px; text-wrap: pretty">Microbiome Metadata Crisis</div>
+      <div style="font: 400 13.5px/1.55 Mulish, sans-serif; color: #a1a1a6; margin-bottom: 22px; text-wrap: pretty">A systematic review of the field's own data. Most published microbiome data is public but not reusable &mdash; we quantified how much, and what it would take to fix.</div>
+      <div style="margin-top: auto; display: flex; gap: 26px; padding-top: 16px; border-top: 1px solid #ffffff14">
+        <div style="display: flex; flex-direction: column; gap: 3px"><div style="font: 700 19px/1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.02em">2,300</div><div style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.1em; text-transform: uppercase">papers reviewed</div></div><div style="display: flex; flex-direction: column; gap: 3px"><div style="font: 700 19px/1 Mulish, sans-serif; color: #f5f5f7; letter-spacing: -0.02em">10.8%</div><div style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: #86868b; letter-spacing: 0.1em; text-transform: uppercase">reusable</div></div>
+      </div>
+      <div class="rule" style="position: absolute; left: 0; bottom: 0; height: 2px; width: 32%; background: #2997ff"></div>
+    </a>
+  </section>
+
+  <footer style="display: flex; justify-content: space-between; align-items: center; padding: 20px 56px 30px; border-top: 1px solid #ffffff14; font: 400 12.5px/1 Mulish, sans-serif; color: #86868b">
+    <div>DeGregori et&nbsp;al. 2024 &nbsp;·&nbsp; <em style="font-style: italic">Biological Reviews</em> &nbsp;·&nbsp; <a href="#">Gut microbiomes across the tree of life</a></div>
+    <div>@poopomics</div>
+  </footer>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
