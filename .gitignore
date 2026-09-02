@@ -4,6 +4,11 @@ photos.zip
 *.heic
 build/people/src/
 reference/legacy-site/assets/
+# ...except the three portraits the build actually reads for the director/advisor cards,
+# without which a fresh clone cannot build
+!reference/legacy-site/assets/people-01.jpg
+!reference/legacy-site/assets/people-02.jpg
+!reference/legacy-site/assets/people-03.jpg
 
 # The derived crops (6 MB total) ARE tracked: they are what build_site.py actually reads, so a
 # fresh clone can build the site without the 270 MB of originals.
