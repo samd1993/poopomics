@@ -983,6 +983,21 @@ main.p-behind{transform:scale(.965);filter:brightness(.42) saturate(.85)}
   .p-row{height:62px}
 }
 @media (max-width:700px){
+  /* These are journal multipanels — a circular host phylogeny, paired diversity plots, a waffle
+     143 cells wide. Squeezed into a 300px column their axis labels come out at three or four
+     pixels, which is what "not sized for mobile" means here. Give each figure a floor it stays
+     legible at and let it scroll sideways inside its own box, the way a wide table would. */
+  .p-fig-body{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;padding-bottom:4px}
+  /* the figure box must be allowed to be narrower than its contents, or it just grows and the
+     scroll never happens: grid and flex children default to min-width:auto */
+  .p-figs{grid-template-columns:minmax(0,1fr)}
+  .p-fig,.p-fig-body{min-width:0}
+  .p-fig-body img{max-width:none;max-height:none;width:620px;height:auto;margin:0}
+  .p-fig-svg{width:620px;flex:none}
+  /* a soft edge on the right, so it is obvious there is more figure than fits */
+  .p-fig-body{-webkit-mask-image:linear-gradient(90deg,#000 94%,#000a);
+    mask-image:linear-gradient(90deg,#000 94%,#000a)}
   .p-top-in{flex-direction:column;align-items:flex-start;gap:10px}
   /* nineteen names wrap to seven lines on a phone and push the cards off the screen; keep
      them on one swipeable line instead */
