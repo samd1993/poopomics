@@ -42,10 +42,12 @@ describe.
 
 ## Reuse
 
-The build scripts are the authors' own work. **The photographs, the figures and the manuscript
-artwork are not licensed for reuse**: the portraits are of named people, and the GMToL and HMToL
-figures come from manuscripts that are not yet published. Please ask before reusing anything in
-`build/people/`, `build/figs/gmtol/` or `build/figs/hmtol/`.
+The build software is MIT licensed — see [LICENSE](LICENSE).
+
+The photographs and figures are not. The portraits are used with the permission of the students
+pictured, given for media use on this project; that permission does not travel to third parties.
+The GMToL figures accompany a preprint and the HMToL dataset is not yet published. Please ask
+before reusing anything in `build/people/`, `build/figs/gmtol/` or `build/figs/hmtol/`.
 
 Third-party photographs in the news section are credited in `build/news/credits.json` and are
 public domain, CC0, or CC BY 4.0.
