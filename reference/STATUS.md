@@ -1592,3 +1592,28 @@ captions**, a clause each, rather than being dropped. Better placed there anyway
 figures it describes.
 
 MMC page is now figures -> Papers -> consortium list, no asides. Both deletion threads closed.
+
+## fifty-second round — live, and legible on a phone
+
+**poopomics.com is up.** `www` is primary on Netlify, apex 301s to it, password gate removed,
+HTTP 200.
+
+**netlify.toml is in effect** even though the UI showed nothing — proved from outside rather than
+assumed: `/assets/*` comes back with `max-age=31536000, immutable` and an unknown path returns 200
+via the SPA fallback. Both are toml-only rules. Netlify leaves the UI fields blank when a toml
+exists.
+
+**Deploy from git works end to end**: pushed the mobile fix, and the live CSS carried it a minute
+later without anyone dragging a folder.
+
+**The mobile bug.** Journal multipanels in a ~300px column rendered axis labels at three or four
+pixels. Each `.p-fig-body` now scrolls sideways with the figure fixed at 620px — about 2x, and
+legible. The catch that made the first attempt fail: grid and flex children default to
+`min-width:auto`, so the figure box grew to 1200px instead of scrolling. `.p-figs` needed
+`minmax(0,1fr)` and `.p-fig,.p-fig-body` needed `min-width:0`. A right-edge mask hints there is
+more figure than fits.
+
+The lens charts were already responsive and were left alone — checked at 375px, they read fine.
+
+**Repo is public**: github.com/samd1993/poopomics, MIT on the build software with the photographs
+and figures carved out. A fresh clone builds (three legacy portraits had to be un-ignored).
