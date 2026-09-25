@@ -35,7 +35,7 @@ if SITE_MODE:
 
 OUT = os.path.join(HERE, "mmc-v1.html")
 ART = os.path.join(HERE, "mmc-v1-artifact.html")
-MEMBERS_CLAIM = "247"
+MEMBERS_CLAIM = "246"
 
 # Nicknames and full names that are plainly the same person. Kept here rather than in namekey.py
 # so the main site's matching is untouched.
