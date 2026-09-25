@@ -177,7 +177,7 @@ def home_view():
       "public, but not reusable.",
       svg("figs/cards/mmc-card.svg", "p-motif-svg"),
       [("3,300", "studies"), ("1M+", "samples"),
-       ("450", "students, 19 institutions")])}
+       ("247", "consortium members")])}
 {card("hmtol", "2024&ndash;present", "Human Microbiome Tree of Life (HMToL)",
       "The human-focused successor: a global collection that deliberately reaches the populations "
       "the literature has left out.",
@@ -554,7 +554,7 @@ MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
              "From 33,564 candidate articles down to 3,300 after filtering and the 3,145 human-health "
              "studies read in full, "
              "with roughly 70 variables recorded per article — 143,220 data entries, curated by a "
-             "consortium of about 300 professors, postdocs, graduate and undergraduate students.",
+             "consortium of 247 professors, postdocs, graduate and undergraduate students.",
              span="full"))}
 
 {figs(figure(svg("figs/mmc/mmc-reusability-waffle.svg"),

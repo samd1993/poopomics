@@ -35,7 +35,7 @@ if SITE_MODE:
 
 OUT = os.path.join(HERE, "mmc-v1.html")
 ART = os.path.join(HERE, "mmc-v1-artifact.html")
-MEMBERS_CLAIM = "250+"
+MEMBERS_CLAIM = "247"
 
 # Nicknames and full names that are plainly the same person. Kept here rather than in namekey.py
 # so the main site's matching is untouched.
@@ -63,11 +63,17 @@ def load_members():
     col = {h: i for i, h in enumerate(head)}
     name_c = col["Full Name (as listed in consortium)"]
     uni_c, role_c = col["Current University"], col["Roles"]
-    out = []
+    out, seen = [], set()
     for r in rows[1:]:
         if not r or not r[name_c]:
             continue
-        out.append({"name": " ".join(str(r[name_c]).split()),
+        name = " ".join(str(r[name_c]).split())
+        # the sheet has a few people signed up twice; the first row, which carries their roles,
+        # is the one kept
+        if key(name) in seen:
+            continue
+        seen.add(key(name))
+        out.append({"name": name,
                     "university": (r[uni_c] or "").strip(),
                     "lead": "Project Lead" in (r[role_c] or "")})
     return out
