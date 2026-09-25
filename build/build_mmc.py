@@ -192,22 +192,22 @@ def people_view():
 
 POLICIES = '''<section class="p-intro">
   <h1 class="p-title-accent">Consortium policies</h1>
-  <p class="p-lead">How membership of the MMC Consortium works: joining, what counts as
-  membership, authorship on consortium papers, and what we send you along the way.</p>
+  <p class="p-lead">Please find below our Consortium policies. We will notify members if there are
+  any changes to what is listed here.</p>
 </section>
 
 <div class="p-policy">
   <section>
     <h2>Joining</h2>
-    <p>You join the consortium by joining any of the MMC projects coordinated by Sam Degregori.
-    Contact Sam and he will send you the membership form.</p>
+    <p>You join the consortium by joining any of the MMC projects coordinated by Sam Degregori and
+    Project Leads. Contact Sam and he will send you the membership form.</p>
   </section>
 
   <section>
     <h2>Criteria for membership</h2>
-    <p>You become an official member by completing the minimum data-curation contribution for an
-    MMC project, a threshold set at the start of each project, and/or by contributing to an MMC
-    manuscript in a meaningful way.</p>
+    <p>You become an official member by completing the minimum required data-curation effort for
+    an MMC project, a threshold set at the start of each project, and/or by contributing to an MMC
+    manuscript.</p>
   </section>
 
   <section>
@@ -218,20 +218,16 @@ POLICIES = '''<section class="p-intro">
   </section>
 
   <section>
-    <h2>What you will be sent, and when</h2>
+    <h2>What you will be sent</h2>
     <p>Every member is sent the manuscript at three points:</p>
     <ul>
       <li>before it is first submitted;</li>
-      <li>before any resubmission;</li>
+      <li>before any resubmission; and</li>
       <li>when it is published, with its citation and DOI.</li>
     </ul>
-  </section>
-
-  <section>
-    <h2>If we cannot reach you</h2>
-    <p>If we cannot reach you at the email address you gave us, we will take it that you no longer
-    wish to be part of the consortium. If your university address may expire, please give us an
-    alternative address when you sign up.</p>
+    <p class="p-policy-after">If we cannot reach you at the email address you gave us, we will take
+    it that you no longer wish to be part of the consortium. If your university address may expire,
+    please give us an alternative address when you sign up.</p>
   </section>
 
   <section>
@@ -248,6 +244,7 @@ EXTRA_CSS = """
 .p-policy h2{font-family:var(--display);margin:0 0 8px;font-size:22px;font-weight:700;
   letter-spacing:-.015em;line-height:1.25}
 .p-policy p,.p-policy li{margin:0;font-size:16px;line-height:1.65;color:var(--lead)}
+.p-policy-after{margin-top:14px !important}
 .p-policy ul{margin:10px 0 0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
 @media (max-width:900px){.p-leads-two{grid-template-columns:1fr}}
 """
