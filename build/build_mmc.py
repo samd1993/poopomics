@@ -205,8 +205,8 @@ POLICIES = '''<section class="p-intro">
 <div class="p-policy">
   <section>
     <h2>Joining</h2>
-    <p>You join the consortium by joining any of the MMC projects coordinated by Sam Degregori and
-    Project Leads. Contact Sam and he will send you the membership form.</p>
+    <p>You join the consortium by joining any of the MMC projects coordinated by Sam Degregori, Rob
+    Knight, and Project Leads. Contact Sam and he will send you the membership form.</p>
   </section>
 
   <section>
