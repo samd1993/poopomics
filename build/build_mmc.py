@@ -46,6 +46,7 @@ ALIASES = {
     "sai malleboyina": "sahithi malleboyina",
     "qin(amy) xia": "amy xia",
     "yuxuan xie": "bree xie",
+    "randima dona": "randima bellana",      # listed in full as Randima Hasanthi Bellana Vidanelage Dona
 }
 
 
@@ -138,12 +139,17 @@ def home_view():
     nums = [(MEMBERS_CLAIM, "members"), (str(len(INSTITUTIONS)), "institutions"),
             ("3,145", "studies surveyed"), ("1M+", "samples")]
     bignums = "".join('<div><b>%s</b><span>%s</span></div>' % n for n in nums)
-    # news here is MMC's own: its paper and its conference work
+    # News here is the consortium's own: its paper, and acceptances of people who are members.
+    # An acceptance whose person is not on the member sheet is left off, for the same reason the
+    # medical-school ones are: they are not part of the consortium.
+    member_keys = {key(m["name"]) for m in MEMBERS}
     keep = []
     for heading, items in bs.NEWS:
         if heading == "Publications":
             items = [it for it in items if "Sample Size" in it["title"]]
-        elif heading != "Conferences":
+        elif heading in ("PhD Program Acceptances!", "Masters Program Acceptances!"):
+            items = [it for it in items if key(it.get("portrait") or "") in member_keys]
+        else:
             continue
         if items:
             keep.append((heading, items))

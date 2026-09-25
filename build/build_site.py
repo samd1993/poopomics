@@ -582,7 +582,7 @@ MMC = f'''{figs(figure(svg("figs/mmc/mmc-study-overview.svg"),
 
 {papers(("Sample Size Reporting in Human Cancer Microbiome Research is Inconsistent and "
         "Unstandardized",
-        "Preprint &middot; in revision at <em>Access Microbiology</em>, 18 February 2026",
+        "Preprint &middot; <em>Access Microbiology</em>, 18 February 2026",
         "https://doi.org/10.1099/acmi.0.001187.v1"))}
 '''
 
