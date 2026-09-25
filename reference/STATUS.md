@@ -1617,3 +1617,25 @@ The lens charts were already responsive and were left alone — checked at 375px
 
 **Repo is public**: github.com/samd1993/poopomics, MIT on the build software with the photographs
 and figures carved out. A fresh clone builds (three legacy portraits had to be un-ignored).
+
+## fifty-third round — the MMC Consortium site, and a slower band
+
+**Band speed.** `band_css()` now drifts at a set speed per strip (`BAND_SPEED = {1:31, 2:27,
+3:29}` px/s, from ~50/43/46) instead of a fixed duration, so strips of any length roll at the same
+pace. Main band loops went 96/112/104s -> 156/179/167s. Pushed; live.
+
+**`build/build_mmc.py`** — an MMC-only site reusing build_site's CSS, figures and helpers.
+Views: Home (hero, 250+ / 28 / 3,145 / 1M+, a band of consortium members only, MMC news), Findings
+(`bs.MMC`), Members, Policies. Preview: https://claude.ai/artifact/P2abSWwQx8pXgphHoTX4mt
+`--site` writes `mmc-site/` (0.88 MB + 134 assets) via a new `POOP_ASSET_DIR` hook in build_site,
+so it never touches or clears the main `site/assets`.
+
+- Members come from `MMC/MMC Consortium Members - Clean.xlsx` (242 rows). **Only names are read**;
+  the sheet's personal/university emails never enter the page — checked, zero addresses in the
+  output. The sheet is outside the repo on purpose, so a clone cannot build this site.
+- 127 members have a photo on file, 114 are listed by name. Project leads first (13, labelled),
+  then alphabetical by surname. Sam (not in the sheet) and Rob get Director/Advisor cards.
+- Six local aliases, flagged to Sam: Alexander/Alex Nath, Maxwell/Max Hong, Linden/Lindy
+  Stadtlander, Sai Sahithi/Sahithi Malleboyina, Qin (Amy)/Amy Xia, **Yuxuan/Bree Xie** (the least
+  certain; both are project leads).
+- Policies page written from Sam's reply. It does not answer Rob's second and third points.
