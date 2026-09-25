@@ -80,8 +80,8 @@ faces = json.load(open(os.path.join(HERE, "people", "faces_index.json")))
 face_by_key = {key(e["name"]): e for e in faces if e["name"]}
 
 # the director and the advisor get cards of their own at the top, so they are not repeated below
-AT_TOP = {"Sam Degregori": ("Director", "Postdoctoral fellow, UC San Diego"),
-          "Rob Knight": ("Advisor", "Professor, UC San Diego")}
+AT_TOP = {"Sam Degregori": ("Consortium lead", "Postdoctoral fellow, UC San Diego"),
+          "Rob Knight": ("Consortium advisor", "Professor, UC San Diego")}
 top_keys = {key(n) for n in AT_TOP}
 
 members = [m for m in MEMBERS if key(m["name"]) not in top_keys]
@@ -181,8 +181,7 @@ def people_view():
 <h2 class="p-sec-h">Members</h2>
 <div class="p-grid">{tiles}</div>
 
-<h2 class="p-sec-h">Also in the consortium</h2>
-<ul class="p-names">{names}</ul>'''
+<ul class="p-names p-names-after">{names}</ul>'''
 
 
 POLICIES = '''<section class="p-intro">
@@ -238,6 +237,7 @@ POLICIES = '''<section class="p-intro">
 
 EXTRA_CSS = """
 .p-leads-two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}
+.p-names-after{margin-top:28px}
 .p-policy{display:flex;flex-direction:column;gap:30px;margin:26px 0 0;max-width:68ch}
 .p-policy h2{font-family:var(--display);margin:0 0 8px;font-size:22px;font-weight:700;
   letter-spacing:-.015em;line-height:1.25}

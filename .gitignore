@@ -34,3 +34,6 @@ build/site
 site/
 build/mmc-site
 mmc-site/
+build/mmc-v1.html
+build/mmc-v1-artifact.html
+deploy/MMC Consortium.html
