@@ -301,8 +301,7 @@ def build():
 </main>
 
 <div class="p-wrap"><footer class="p-foot">
-  <div>The Microbiome Metadata Crisis Consortium &nbsp;·&nbsp;
-    <a href="https://www.poopomics.com">poopomics.com</a></div>
+  <div>The Microbiome Metadata Crisis Consortium</div>
 </footer></div>
 
 <script>{JS}</script>"""
