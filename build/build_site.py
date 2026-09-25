@@ -37,8 +37,11 @@ def svg(path, cls="p-fig-svg"):
 # background image on a hidden view is never fetched — means a phone opening the home page does
 # not download the 185 portraits behind the People sheet.
 ASSET_DIR = None                       # set to a path to switch to file assets
-if "--site" in sys.argv:               # must be decided before the views are assembled below
-    ASSET_DIR = os.path.abspath(os.path.join(HERE, "..", "site", "assets"))
+# POOP_ASSET_DIR lets another build (the MMC consortium site) reuse these helpers while writing
+# its assets somewhere of its own, instead of into — and clearing — the main site's folder
+if os.environ.get("POOP_ASSET_DIR") or "--site" in sys.argv:
+    ASSET_DIR = os.path.abspath(os.environ.get("POOP_ASSET_DIR")
+                                or os.path.join(HERE, "..", "site", "assets"))
     # assets are content-hashed, so a stale one is never referenced but would sit there for ever
     if os.path.isdir(ASSET_DIR):
         shutil.rmtree(ASSET_DIR)
@@ -127,16 +130,24 @@ def band():
     return '<div class="p-band" aria-label="Researchers on the projects">%s</div>' % rows
 
 
-def band_css():
+# Drift speed per strip in CSS px per second. Set as a speed rather than a duration so a strip
+# of any length — this site's, or the consortium site's shorter ones — rolls at the same pace.
+# Was ~50/43/46 px/s, which read as too quick; the rows keep slightly different speeds so the
+# band never lines up into a grid.
+BAND_SPEED = {1: 31, 2: 27, 3: 29}
+
+
+def band_css(strips=None):
     """Each strip is drawn twice its own width by repeat-x, then scrolled by exactly one width."""
     from PIL import Image
-    out, secs = [], {1: 96, 2: 112, 3: 104}
+    out = []
     for i in (1, 2, 3):
-        path = "people/strips/band-%d.jpg" % i
+        path = (strips or {}).get(i, "people/strips/band-%d.jpg" % i)
         w = Image.open(os.path.join(HERE, path)).width // 2      # sources are 2x
+        secs = round(w / BAND_SPEED[i])
         rev = " reverse" if i == 2 else ""
         out.append(".p-row-%d{background-image:url(%s);animation:drift%d %ds linear infinite%s}"
-                   % (i, data_uri(path, "image/jpeg"), i, secs[i], rev))
+                   % (i, data_uri(path, "image/jpeg"), i, secs, rev))
         out.append("@keyframes drift%d{from{background-position-x:0}"
                    "to{background-position-x:-%dpx}}" % (i, w))
     return "\n".join(out)

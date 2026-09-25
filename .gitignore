@@ -32,3 +32,5 @@ build/site
 
 # the hosted build output; regenerate with ./publish
 site/
+build/mmc-site
+mmc-site/
