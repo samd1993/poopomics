@@ -221,7 +221,7 @@ def _news_item(d):
     """content.yaml carries only what an item has; the renderers expect every key present."""
     pic = d.get("pic") or {}
     return dict(title=d["title"], note=d["note"], url=d.get("url"), meta=d.get("meta"),
-                date=d.get("date"), people=d.get("people"), portrait=d.get("portrait"),
+                date=d.get("date"), people=d.get("people"), portrait=d.get("portrait"), portrait_photo=d.get("portrait_photo"),
                 photo=d.get("photo"), flip=d.get("flip", False),
                 pic=(pic.get("kind"), pic.get("ref")))
 
@@ -274,14 +274,20 @@ def news_faces(names):
     return '<div class="p-news-faces">%s</div>' % "".join(out) if out else ""
 
 
-def news_portrait(name):
-    """One person, shown as large as the institution photo beside them."""
+def news_portrait(name, photo=None):
+    """One person, shown as large as the institution photo beside them.
+
+    photo: a fuller picture sent for the news item, used here in place of their face crop."""
     import sys as _sys
     _sys.path.insert(0, os.path.join(HERE, "people"))
     import namekey
     k = namekey.key(name)
     if k not in FACE_CLASS:
         return ""
+    if photo:
+        return ('<figure class="p-news-portrait"><div role="img" aria-label="%s" '
+                'style="background-image:url(%s)"></div><figcaption>%s</figcaption></figure>'
+                % (FACE_NAME[k], data_uri(photo, "image/jpeg"), FACE_NAME[k]))
     return ('<figure class="p-news-portrait"><div class="f%d" role="img" aria-label="%s"></div>'
             '<figcaption>%s</figcaption></figure>' % (FACE_CLASS[k], FACE_NAME[k], FACE_NAME[k]))
 
@@ -302,7 +308,7 @@ def news_view():
                 # alternating side to side down the whole section
                 side = "is-right" if offers[0] % 2 == 0 else "is-left"
                 offers[0] += 1
-                face = news_portrait(it["portrait"])
+                face = news_portrait(it["portrait"], it.get("portrait_photo"))
                 # nobody has sent a photograph of everyone; without one the row runs full width
                 # rather than leaving a portrait-sized hole beside the text
                 solo = "" if face else " p-offer-solo"
