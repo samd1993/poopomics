@@ -77,7 +77,8 @@ face_by_key = {key(e["name"]): e for e in faces if e["name"]}
 # them is repeated in the member lists below. Affiliations for the co-PIs come off the sheet.
 AT_TOP = {"Sam Degregori": ("Consortium Director", "Postdoctoral fellow, UC San Diego"),
           "Rob Knight": ("Lead Advisor", "Professor, UC San Diego")}
-CO_PIS = ["Jack Gilbert", "Emiley Eloe-Fadrosh", "Taichi Suzuki", "Saurabh Mehta"]
+CO_PIS = ["Jack Gilbert", "Emiley Eloe-Fadrosh", "Taichi Suzuki", "Saurabh Mehta",
+          "Pieter C. Dorrestein", "Christopher J. Mungall"]
 # project leads the sheet's Roles column does not mark
 EXTRA_LEADS = {key("Sterling Wright")}
 
