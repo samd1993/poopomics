@@ -99,6 +99,8 @@ without_photo = [m for m in rest if key(m["name"]) not in face_by_key]
 
 # local face index: the page's own f0..fN classes, pointing at the consortium's portraits only
 INDEX = [{"name": m["name"], "file": face_by_key[key(m["name"])]["file"]} for m in with_photo]
+# the director and lead advisor head the page as tiles like everyone else's
+INDEX += [{"name": n, "file": face_by_key[key(n)]["file"]} for n in AT_TOP if key(n) in face_by_key]
 bs.FACE_CLASS = {key(e["name"]): i for i, e in enumerate(INDEX)}
 bs.FACE_NAME = {key(e["name"]): e["name"] for e in INDEX}
 
@@ -177,23 +179,7 @@ def initials(name):
     return (parts[0][0] + parts[-1][0]).upper()
 
 
-def card(name, role, where, photo=None):
-    pic = photo or '<div class="p-lead-mono" aria-hidden="true">%s</div>' % initials(name)
-    return ('<div class="p-lead-card">%s<div><b>%s</b><i>%s</i><span>%s</span></div></div>'
-            % (pic, name, role, where))
-
-
 def people_view():
-    legacy = json.load(open(os.path.join(HERE, "people", "legacy_people.json")))
-    by_name = {p["name"]: p for p in legacy}
-    top = "".join(
-        card(n, role, where,
-             bs.img("../reference/legacy-site/assets/" + by_name[n]["asset"], n,
-                    "image/png" if by_name[n]["asset"].endswith("png") else "image/jpeg")
-             if n in by_name else None)
-        for n, (role, where) in AT_TOP.items())
-    copis = "".join(card(n, "Co-PI", uni_of.get(key(n), "")) for n in CO_PIS)
-
     pos = {key(e["name"]): i for i, e in enumerate(INDEX)}
 
     def tile(m, role=None):
@@ -205,6 +191,15 @@ def people_view():
                 '%s</div><figcaption>%s%s</figcaption></figure>'
                 % (initials(m["name"]), m["name"], r))
 
+    def with_where(html, where):
+        # leadership tiles keep the affiliation their cards carried
+        return html.replace("</figcaption>", '<span class="p-face-where">%s</span></figcaption>'
+                            % where, 1) if where else html
+
+    top = "".join(with_where(tile({"name": n}, role), where)
+                  for n, (role, where) in AT_TOP.items())
+    copis = "".join(with_where(tile({"name": n}, "Co-PI"), uni_of.get(key(n), ""))
+                    for n in CO_PIS)
     lead_tiles = "".join(tile(m, "Project lead") for m in leads)
     member_tiles = "".join(tile(m) for m in rest if key(m["name"]) in pos)
     names = "".join('<li>%s</li>' % m["name"] for m in without_photo)
@@ -212,8 +207,8 @@ def people_view():
   <h1 class="p-title-accent">Consortium members</h1>
 </section>
 
-<div class="p-leads p-leads-top p-leads-two">{top}</div>
-<div class="p-leads p-leads-four">{copis}</div>
+<div class="p-grid p-grid-top">{top}</div>
+<div class="p-grid p-grid-top">{copis}</div>
 
 <h2 class="p-sec-h">Project leads</h2>
 <div class="p-grid">{lead_tiles}</div>
@@ -279,15 +274,10 @@ POLICIES = '''<section class="p-intro">
 EXTRA_CSS = """
 .p-leads-two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}
 .p-names-after{margin-top:28px}
-.p-leads-four{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px}
-/* a co-PI or lead with no portrait on file gets their initials, so the row keeps its rhythm */
-.p-lead-mono{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
-  background:var(--elev);border:1px solid var(--hair2);color:var(--ink2);
-  font:600 20px/1 var(--display);letter-spacing:.02em}
 .p-face-mono{display:grid;place-items:center;background:var(--elev);
   box-shadow:inset 0 0 0 1px var(--hair2);color:var(--ink2);font:600 26px/1 var(--display)}
-@media (max-width:1100px){.p-leads-four{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:600px){.p-leads-four{grid-template-columns:1fr}}
+.p-grid-top + .p-grid-top{margin-top:18px}
+.p-face-where{display:block;margin-top:3px;font-size:11.5px;line-height:1.35;color:var(--ink3)}
 .p-policy{display:flex;flex-direction:column;gap:30px;margin:26px 0 0;max-width:68ch}
 .p-policy h2{font-family:var(--display);margin:0 0 8px;font-size:22px;font-weight:700;
   letter-spacing:-.015em;line-height:1.25}
