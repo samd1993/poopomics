@@ -1474,5 +1474,11 @@
   "source": "photos",
   "kind": "portrait",
   "name": "Tyler Myers"
+ },
+ {
+  "file": "face-383.jpg",
+  "source": "better",
+  "kind": "portrait",
+  "name": "Sterling Wright"
  }
 ]
