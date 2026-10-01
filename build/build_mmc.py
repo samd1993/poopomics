@@ -39,20 +39,7 @@ MEMBERS_CLAIM = "246"
 
 # Nicknames and full names that are plainly the same person. Kept here rather than in namekey.py
 # so the main site's matching is untouched.
-ALIASES = {
-    "alexander nath": "alex nath",
-    "maxwell hong": "max hong",
-    "linden stadtlander": "lindy stadtlander",
-    "sai malleboyina": "sahithi malleboyina",
-    "qin(amy) xia": "amy xia",
-    "yuxuan xie": "bree xie",
-    "randima dona": "randima bellana",      # listed in full as Randima Hasanthi Bellana Vidanelage Dona
-}
-
-
-def key(name):
-    k = namekey.key(name)
-    return ALIASES.get(k, k)
+from member_key import ALIASES, key
 
 
 # ------------------------------------------------------------------- members ----

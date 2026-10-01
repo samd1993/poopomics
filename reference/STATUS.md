@@ -1647,3 +1647,16 @@ so it never touches or clears the main `site/assets`.
 - Members page: Project leads is its own grid (14), then Members (116 photos), then 108 names.
 - mmc-site/ is now tracked and carries its own netlify.toml, for a second Netlify site with base
   directory `mmc-site` serving mmc-consortium.com. ./publish rebuilds it.
+
+## 30 Sep 2026 — photo dump: members without a portrait filled in
+- New form export (photos_Sep30_26/, gitignored: its sheet carries emails). import_photos.py now
+  reads it and checks both halves of each upload name against the member sheet; ten uploads
+  under nicknames/initials are mapped by hand (UPLOAD_NAMES). Felix Liang left unmatched.
+- Fill-only, by Sam's instruction: no existing portrait was replaced. 60 members gained a face
+  (face-323..382, appended to faces_index.json); 13 whose photo was already filed under an
+  account name (Mike Qiu = Chuyu Qiu, ...) are matched by alias in people/member_key.py.
+  Palak Sadana and Yue Fan hand-cropped (detector missed). MMC: 202 with photo, 35 by name.
+- make_faces.py DROP now keyed by upload name rather than photo-NNN, which shifts on re-import.
+  Do not rerun make_faces.py wholesale: it would renumber and re-crop everyone.
+- OpenCV venv now at ~/.venvs/faces (opencv-python-headless<5; 5.x dropped Haar cascades).
+- Count left at 246: rows up to Rob Knight are 244 unique people after repeat submissions.

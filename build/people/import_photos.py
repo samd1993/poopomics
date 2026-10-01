@@ -12,7 +12,14 @@ Run: python3 import_photos.py
 import json, os, re, subprocess, sys, unicodedata, zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ZIP = os.path.abspath(os.path.join(HERE, "..", "..", "photos.zip"))
+# the newest form export wins; earlier ones are kept beside it as received
+ZIPS = [os.path.join(HERE, "..", "..", "photos_Sep30_26", "photos.zip"),
+        os.path.join(HERE, "..", "..", "photos.zip")]
+ZIP = os.path.abspath(next((z for z in ZIPS if os.path.exists(z)), ZIPS[-1]))
+# the consortium sheet, read only for names: an upload's two halves are checked against it, so
+# "Yue_Fan - Roger Fan" is filed under the member rather than the nickname on the account
+SHEET = os.path.abspath(os.path.join(HERE, "..", "..", "..", "..", "MMC",
+                                     "MMC Consortium Members - Clean.xlsx"))
 OUT = os.path.join(HERE, "src", "photos")
 
 # account names that are handles, jokes or placeholders rather than a person
@@ -37,7 +44,37 @@ def looks_like_name(s):
             return None
         if len(core.rstrip(".")) < 2 and len(toks) == 1:
             return None          # a lone initial is not a name; a middle initial is fine
-    return " ".join(t if t[:1].isupper() else t.capitalize() for t in toks)
+    return " ".join(t if t[:1].isupper() and not t.isupper() else t.capitalize() for t in toks)
+
+
+def member_keys():
+    if not os.path.exists(SHEET):
+        return set()
+    import openpyxl
+    from member_key import key
+    rows = openpyxl.load_workbook(SHEET, read_only=True).worksheets[0].iter_rows(values_only=True)
+    head = next(rows)
+    i = head.index("Full Name (as listed in consortium)")
+    return {key(r[i]) for r in rows if r[i]}
+
+
+MEMBERS = None
+
+# uploads whose name is a nickname, initial or script the sheet does not carry; each matched to the
+# only member it can be (Staleny is in Yvenica's address). Felix Liang is left unmatched: Xiang
+# Feng Liang is plausible but nothing on the sheet confirms it.
+UPLOAD_NAMES = {
+    "Staleny Calixte": "Yvenica Calixte",
+    "Trisha D": "Trisha Dutta",
+    "Jake A": "Jake Albert",
+    "Savio Stephan Ms": "Savio Stephan",
+    "Andrea Ortiz": "Andrea Ortiz Iglesias",
+    "Mariana Hurutado": "Mariana Hurutado-Rodriguez",
+    "\u6e29\u535a\u680b": "Bodong Wen",
+    "Eve": "Evelina Iskhakova",
+    "Ritvik V": "Ritvik Vudatha",
+    "Mohak": "Mohak Prakash",
+}
 
 
 def parse(entry):
@@ -49,6 +86,16 @@ def parse(entry):
         uploaded, account = stem.rsplit(" - ", 1)
     else:
         uploaded, account = stem, ""
+    global MEMBERS
+    if MEMBERS is None:
+        MEMBERS = member_keys()
+    # a half that names a consortium member wins outright
+    if MEMBERS:
+        from member_key import key
+        for cand in (uploaded, account):
+            n = looks_like_name(re.sub(r"\(\d+\)$", "", cand))
+            if n and key(n) in MEMBERS:
+                return n, ext
     # the account name is a real person's name more often than the uploaded filename is
     for cand in (account, uploaded):
         n = looks_like_name(cand)
@@ -66,6 +113,7 @@ def main():
     index, unnamed, converted = [], 0, 0
     for i, entry in enumerate(sorted(n for n in z.namelist() if not n.endswith("/"))):
         name, ext = parse(entry)
+        name = UPLOAD_NAMES.get(name, name)
         stem = "photo-%03d" % (i + 1)
         raw = os.path.join(OUT, stem + (ext or ".bin"))
         with open(raw, "wb") as fh:

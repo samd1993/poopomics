@@ -37,12 +37,12 @@ MARGIN = 0.62            # box expansion; Haar boxes are tight on the face
 # Keyed by (source, file, which detection) rather than by output number — adding a source used to
 # shift every number and silently drop the wrong faces.
 DROP = {
-    ("photos", "photo-007.png", 0),        # Akshobya Pant — near-black frame
-    ("photos", "photo-032.jpg", 0),        # a Hopkins banner, no face
-    ("photos", "photo-089.jpeg", 0),       # landscape, person is a speck
-    ("photos", "photo-090.jpeg", 0),       # the same, second submission
-    ("photos", "photo-122.png", 0),        # a PDF that converted to a tiny figure
-    ("photos", "photo-134.jpg", 0),        # near-black outdoor frame
+    ("photos", "Akshobya_Pant - akshobya pant.png", 0),   # Akshobya Pant — near-black frame
+    ("photos", "Drishti Pic - Drishti Mukherjee.JPG", 0),   # a Hopkins banner, no face
+    ("photos", "Prakash_Mohak - Mohak Prakash.jpeg", 0),    # landscape, person is a speck
+    ("photos", "Prakash_Mohak - Mohak.jpeg", 0),            # the same, second submission
+    ("photos", "Yin_Wu - Yin Wu.pdf", 0),                  # a PDF that converted to a tiny figure
+    ("photos", "image - Sterling Wright.jpg", 0),           # near-black outdoor frame
     ("ucsd-team", "home-04.jpg", 0),       # a jar on the table
     ("mmc-zoom-1", "mmc-04.jpg", 0),       # tile fragment carrying two names
     ("mmc-zoom-2", "mmc-07.jpg", 0),       # a nested gallery inside one tile
@@ -204,8 +204,9 @@ def main():
     named, dupes = set(), []
     legacy_names = {p["asset"]: p["name"]
                     for p in json.load(open(os.path.join(HERE, "legacy_people.json")))}
-    photo_names = {p["file"]: p["name"]
-                   for p in json.load(open(os.path.join(HERE, "photos_names.json")))}
+    photos = json.load(open(os.path.join(HERE, "photos_names.json")))
+    photo_names = {p["file"]: p["name"] for p in photos}
+    photo_entry = {p["file"]: os.path.basename(p["source_entry"]) for p in photos}
     for kind, path, tag in SOURCES:
         img = cv2.imread(path, cv2.IMREAD_COLOR)
         if img is None:
@@ -234,7 +235,11 @@ def main():
             px = min(SIZE_BETTER, max(SIZE, min(c.shape[:2]))) if tag == "better" else SIZE
             c = cv2.resize(c, (px, px), interpolation=cv2.INTER_AREA)
             n += 1
-            if (tag, os.path.basename(path), k) in DROP:
+            # form uploads are keyed by the name they arrived under, which survives a re-import;
+            # the photo-NNN numbers shift whenever a newer export adds files
+            drop_as = photo_entry.get(os.path.basename(path), "") if tag == "photos" \
+                else os.path.basename(path)
+            if (tag, drop_as, k) in DROP:
                 continue
             who = name_for(kind, tag, path, box, legacy_names, photo_names)
             if who and norm(who) in named:
