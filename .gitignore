@@ -33,7 +33,8 @@ build/site
 # the hosted build output; regenerate with ./publish
 site/
 build/mmc-site
-mmc-site/
+# mmc-site/ IS tracked: it deploys mmc-consortium.com as built, because its member sheet holds
+# emails and stays off the repo, so the host cannot rebuild it. Regenerate with ./publish.
 build/mmc-v1.html
 build/mmc-v1-artifact.html
 deploy/MMC Consortium.html

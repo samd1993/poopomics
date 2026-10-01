@@ -1,0 +1,10 @@
+# mmc-consortium.com serves this folder as committed: the member sheet it is built from stays off
+# the repo, so there is nothing to build here. Rebuild locally with ./publish and push.
+[build]
+  publish = "."
+  command = "echo prebuilt"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -86,18 +86,29 @@ INSTITUTIONS = sorted({m["university"] for m in MEMBERS if m["university"]})
 faces = json.load(open(os.path.join(HERE, "people", "faces_index.json")))
 face_by_key = {key(e["name"]): e for e in faces if e["name"]}
 
-# the director and the advisor get cards of their own at the top, so they are not repeated below
-AT_TOP = {"Sam Degregori": ("Consortium lead", "Postdoctoral fellow, UC San Diego"),
-          "Rob Knight": ("Consortium advisor", "Professor, UC San Diego")}
-top_keys = {key(n) for n in AT_TOP}
+# The director and the lead advisor get cards at the top, the co-PIs a row beneath them; none of
+# them is repeated in the member lists below. Affiliations for the co-PIs come off the sheet.
+AT_TOP = {"Sam Degregori": ("Consortium Director", "Postdoctoral fellow, UC San Diego"),
+          "Rob Knight": ("Lead Advisor", "Professor, UC San Diego")}
+CO_PIS = ["Jack Gilbert", "Emiley Eloe-Fadrosh", "Taichi Suzuki", "Saurabh Mehta"]
+# project leads the sheet's Roles column does not mark
+EXTRA_LEADS = {key("Sterling Wright")}
+
+for m in MEMBERS:
+    if key(m["name"]) in EXTRA_LEADS:
+        m["lead"] = True
+uni_of = {key(m["name"]): m["university"] for m in MEMBERS}
+top_keys = {key(n) for n in AT_TOP} | {key(n) for n in CO_PIS}
 
 members = [m for m in MEMBERS if key(m["name"]) not in top_keys]
 surname = lambda m: m["name"].split()[-1].lower()
-# project leads first, then everyone else alphabetically by surname
-members.sort(key=lambda m: (not m["lead"], surname(m)))
+members.sort(key=surname)
 
-with_photo = [m for m in members if key(m["name"]) in face_by_key]
-without_photo = sorted((m for m in members if key(m["name"]) not in face_by_key), key=surname)
+# project leads are their own group, photo or not; everyone else splits into photo and name list
+leads = [m for m in members if m["lead"]]
+rest = [m for m in members if not m["lead"]]
+with_photo = [m for m in leads + rest if key(m["name"]) in face_by_key]
+without_photo = [m for m in rest if key(m["name"]) not in face_by_key]
 
 # local face index: the page's own f0..fN classes, pointing at the consortium's portraits only
 INDEX = [{"name": m["name"], "file": face_by_key[key(m["name"])]["file"]} for m in with_photo]
@@ -157,10 +168,12 @@ def home_view():
     return f'''<section class="p-hero">
   <div class="p-eyebrow">Microbiome Metadata Crisis</div>
   <h1>The MMC Consortium</h1>
-  <p class="p-lead">Most published microbiome data is public, but not reusable. The consortium is
-  {MEMBERS_CLAIM} undergraduates, graduate students, postdocs and professors across
-  {len(INSTITUTIONS)} institutions, reading the clinical human microbiome literature by hand to
-  find out how much of it can actually be reused.</p>
+  <p class="p-lead">Despite the wealth of microbiome data that exists on public repositories, much
+  of it remains unusable. This consortium consists of {MEMBERS_CLAIM} undergraduates, graduate
+  students, postdocs and professors across {len(INSTITUTIONS)} institutions, who have sought to
+  uncover exactly what proportion of public microbiome data can actually be reused. This was a
+  massive effort and one that will continue to grow as we aim to transform the microbiome field
+  into one that abides by FAIR data policies.</p>
   <div class="p-bignums">{bignums}</div>
 </section>
 
@@ -172,26 +185,54 @@ def home_view():
 {bs.news_view()}'''
 
 
+def initials(name):
+    parts = [p for p in name.replace("-", " ").split() if p[:1].isalpha()]
+    return (parts[0][0] + parts[-1][0]).upper()
+
+
+def card(name, role, where, photo=None):
+    pic = photo or '<div class="p-lead-mono" aria-hidden="true">%s</div>' % initials(name)
+    return ('<div class="p-lead-card">%s<div><b>%s</b><i>%s</i><span>%s</span></div></div>'
+            % (pic, name, role, where))
+
+
 def people_view():
     legacy = json.load(open(os.path.join(HERE, "people", "legacy_people.json")))
     by_name = {p["name"]: p for p in legacy}
-    cards = "".join(
-        '<div class="p-lead-card">%s<div><b>%s</b><i>%s</i><span>%s</span></div></div>'
-        % (bs.img("../reference/legacy-site/assets/" + by_name[n]["asset"], n,
-                  "image/png" if by_name[n]["asset"].endswith("png") else "image/jpeg"),
-           n, role, where)
-        for n, (role, where) in AT_TOP.items() if n in by_name)
-    tiles = "".join(bs.face_tile(i, e, "Project lead" if with_photo[i]["lead"] else None)
-                    for i, e in enumerate(INDEX))
+    top = "".join(
+        card(n, role, where,
+             bs.img("../reference/legacy-site/assets/" + by_name[n]["asset"], n,
+                    "image/png" if by_name[n]["asset"].endswith("png") else "image/jpeg")
+             if n in by_name else None)
+        for n, (role, where) in AT_TOP.items())
+    copis = "".join(card(n, "Co-PI", uni_of.get(key(n), "")) for n in CO_PIS)
+
+    pos = {key(e["name"]): i for i, e in enumerate(INDEX)}
+
+    def tile(m, role=None):
+        k = key(m["name"])
+        if k in pos:
+            return bs.face_tile(pos[k], INDEX[pos[k]], role)
+        r = '<span class="p-face-role">%s</span>' % role if role else ""
+        return ('<figure class="p-face"><div class="p-face-img p-face-mono" aria-hidden="true">'
+                '%s</div><figcaption>%s%s</figcaption></figure>'
+                % (initials(m["name"]), m["name"], r))
+
+    lead_tiles = "".join(tile(m, "Project lead") for m in leads)
+    member_tiles = "".join(tile(m) for m in rest if key(m["name"]) in pos)
     names = "".join('<li>%s</li>' % m["name"] for m in without_photo)
     return f'''<section class="p-intro">
   <h1 class="p-title-accent">Consortium members</h1>
 </section>
 
-<div class="p-leads p-leads-top p-leads-two">{cards}</div>
+<div class="p-leads p-leads-top p-leads-two">{top}</div>
+<div class="p-leads p-leads-four">{copis}</div>
+
+<h2 class="p-sec-h">Project leads</h2>
+<div class="p-grid">{lead_tiles}</div>
 
 <h2 class="p-sec-h">Members</h2>
-<div class="p-grid">{tiles}</div>
+<div class="p-grid">{member_tiles}</div>
 
 <ul class="p-names p-names-after">{names}</ul>'''
 
@@ -251,6 +292,15 @@ POLICIES = '''<section class="p-intro">
 EXTRA_CSS = """
 .p-leads-two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}
 .p-names-after{margin-top:28px}
+.p-leads-four{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px}
+/* a co-PI or lead with no portrait on file gets their initials, so the row keeps its rhythm */
+.p-lead-mono{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  background:var(--elev);border:1px solid var(--hair2);color:var(--ink2);
+  font:600 20px/1 var(--display);letter-spacing:.02em}
+.p-face-mono{display:grid;place-items:center;background:var(--elev);
+  box-shadow:inset 0 0 0 1px var(--hair2);color:var(--ink2);font:600 26px/1 var(--display)}
+@media (max-width:1100px){.p-leads-four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.p-leads-four{grid-template-columns:1fr}}
 .p-policy{display:flex;flex-direction:column;gap:30px;margin:26px 0 0;max-width:68ch}
 .p-policy h2{font-family:var(--display);margin:0 0 8px;font-size:22px;font-weight:700;
   letter-spacing:-.015em;line-height:1.25}

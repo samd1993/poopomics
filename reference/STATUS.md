@@ -1639,3 +1639,11 @@ so it never touches or clears the main `site/assets`.
   Stadtlander, Sai Sahithi/Sahithi Malleboyina, Qin (Amy)/Amy Xia, **Yuxuan/Bree Xie** (the least
   certain; both are project leads).
 - Policies page written from Sam's reply. It does not answer Rob's second and third points.
+
+## 30 Sep 2026 — MMC: leadership rows, project leads group, mmc-consortium.com
+- Home caption replaced with Sam's text. Sam is Consortium Director, Rob Lead Advisor; Jack
+  Gilbert, Emiley Eloe-Fadrosh, Taichi Suzuki and Saurabh Mehta sit beneath them as Co-PIs
+  (initials, no portraits on file). Sterling Wright added as a project lead.
+- Members page: Project leads is its own grid (14), then Members (116 photos), then 108 names.
+- mmc-site/ is now tracked and carries its own netlify.toml, for a second Netlify site with base
+  directory `mmc-site` serving mmc-consortium.com. ./publish rebuilds it.
