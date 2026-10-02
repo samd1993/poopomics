@@ -94,6 +94,9 @@ members.sort(key=surname)
 
 # project leads are their own group, photo or not; everyone else splits into photo and name list
 leads = [m for m in members if m["lead"]]
+# Isabella heads the project leads; the rest follow by surname
+FIRST_LEAD = key("Isabella Huang")
+leads.sort(key=lambda m: key(m["name"]) != FIRST_LEAD)
 rest = [m for m in members if not m["lead"]]
 with_photo = [m for m in leads + rest if key(m["name"]) in face_by_key]
 without_photo = [m for m in rest if key(m["name"]) not in face_by_key]
